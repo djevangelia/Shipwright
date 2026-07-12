@@ -818,7 +818,7 @@ void EnRu2_DialogCameraHandler(EnRu2* this, PlayState* play) {
                 player = GET_PLAYER(play);
                 // "uorya-!" (screeming sound)
                 osSyncPrintf("うおりゃー！ \n");
-                func_8005B1A4(GET_ACTIVE_CAM(play));
+                Camera_SetFinishedFlag(GET_ACTIVE_CAM(play));
                 player->actor.world.pos.x = 820.0f;
                 player->actor.world.pos.y = 0.0f;
                 player->actor.world.pos.z = 180.0f;
@@ -829,7 +829,7 @@ void EnRu2_DialogCameraHandler(EnRu2* this, PlayState* play) {
     this->lastDialogState = dialogState;
     if (Message_GetState(msgCtx) == TEXT_STATE_CLOSING) {
         this->action = ENRU2_WATER_TEMPLE_ENCOUNTER_END;
-        func_8005B1A4(GET_ACTIVE_CAM(play));
+        Camera_SetFinishedFlag(GET_ACTIVE_CAM(play));
     }
 }
 

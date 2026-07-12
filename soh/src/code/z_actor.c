@@ -4142,7 +4142,7 @@ void func_80033C30(Vec3f* arg0, Vec3f* arg1, u8 alpha, PlayState* play) {
 }
 
 void Actor_RequestQuake(PlayState* play, s16 arg1, s16 arg2) {
-    s16 var = Quake_Add(&play->mainCamera, 3);
+    s16 var = Quake_Request(&play->mainCamera, 3);
 
     Quake_SetSpeed(var, 20000);
     Quake_SetQuakeValues(var, arg1, 0, 0, 0);
@@ -4150,7 +4150,7 @@ void Actor_RequestQuake(PlayState* play, s16 arg1, s16 arg2) {
 }
 
 void Actor_RequestQuakeWithSpeed(PlayState* play, s16 arg1, s16 arg2, s16 arg3) {
-    s16 var = Quake_Add(&play->mainCamera, 3);
+    s16 var = Quake_Request(&play->mainCamera, 3);
 
     Quake_SetSpeed(var, arg3);
     Quake_SetQuakeValues(var, arg1, 0, 0, 0);

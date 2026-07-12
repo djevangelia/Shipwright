@@ -592,7 +592,7 @@ void DoorShutter_Close(DoorShutter* this, PlayState* play) {
                                      false);
         }
         Audio_PlayActorSound2(&this->dyna.actor, NA_SE_EV_STONE_BOUND);
-        quakeId = Quake_Add(Play_GetCamera(play, 0), 3);
+        quakeId = Quake_Request(Play_GetCamera(play, 0), 3);
         Quake_SetSpeed(quakeId, -32536);
         Quake_SetQuakeValues(quakeId, 2, 0, 0, 0);
         Quake_SetCountdown(quakeId, 10);
@@ -785,7 +785,7 @@ void DoorShutter_Draw(Actor* thisx, PlayState* play) {
 }
 
 void DoorShutter_RequestQuakeAndRumble(PlayState* play, s16 y, s16 countdown, s16 camId) {
-    s16 quakeId = Quake_Add(Play_GetCamera(play, camId), 3);
+    s16 quakeId = Quake_Request(Play_GetCamera(play, camId), 3);
 
     func_800A9F6C(0.0f, 180, 20, 100);
     Quake_SetSpeed(quakeId, 20000);

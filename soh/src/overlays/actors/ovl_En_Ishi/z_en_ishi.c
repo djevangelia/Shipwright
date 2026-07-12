@@ -434,13 +434,13 @@ void EnIshi_Fly(EnIshi* this, PlayState* play) {
     if (this->actor.bgCheckFlags & 9) {
         EnIshi_DropCollectible(this, play);
         sFragmentSpawnFuncs[type](this, play);
-        if (!(this->actor.bgCheckFlags & 0x20)) {
+        if (!(this->actor.bgCheckFlags & BGCHECKFLAG_WATER)) {
             SoundSource_PlaySfxAtFixedWorldPos(play, &this->actor.world.pos, sBreakSoundDurations[type],
                                                sBreakSounds[type]);
             sDustSpawnFuncs[type](this, play);
         }
         if (type == ROCK_LARGE) {
-            quakeIdx = Quake_Add(GET_ACTIVE_CAM(play), 3);
+            quakeIdx = Quake_Request(GET_ACTIVE_CAM(play), 3);
             Quake_SetSpeed(quakeIdx, -0x3CB0);
             Quake_SetQuakeValues(quakeIdx, 3, 0, 0, 0);
             Quake_SetCountdown(quakeIdx, 7);

@@ -1379,7 +1379,7 @@ void func_80AEDB30(EnRu1* this, PlayState* play) {
             func_80AED4FC(this);
         }
     }
-    if (this->actor.bgCheckFlags & 0x10) {
+    if (this->actor.bgCheckFlags & BGCHECKFLAG_CEILING) {
         speedXZ = &this->actor.speedXZ;
         velocityY = &this->actor.velocity.y;
         if (*speedXZ >= (kREG(27) * 0.01f) + 3.0f) {

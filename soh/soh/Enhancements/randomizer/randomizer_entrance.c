@@ -577,7 +577,7 @@ void Entrance_HandleEponaState(void) {
         // enters an epona supported area, he isn't automatically placed on epona
         player->stateFlags1 &= ~PLAYER_STATE1_ON_HORSE;
         player->actor.parent = NULL;
-        AREG(6) = 0;
+        R_EXITED_SCENE_RIDING_HORSE = 0;
         gSaveContext.equips.buttonItems[0] = gSaveContext.buttonStatus[0]; //"temp B"
         GameInteractor_Should(VB_TEMP_B_RESTORE_SWORDLESS, true);
     }

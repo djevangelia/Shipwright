@@ -151,7 +151,7 @@ void BgBowlWall_FallDoEffects(BgBowlWall* this, PlayState* play) {
             EffectSsHahen_SpawnBurst(play, &effectPos, 10.0f, 0, 50, 15, 3, HAHEN_OBJECT_DEFAULT, 10, NULL);
             Audio_PlayActorSound2(&this->dyna.actor, NA_SE_IT_BOMB_EXPLOSION);
         }
-        quakeIndex = Quake_Add(GET_ACTIVE_CAM(play), 1);
+        quakeIndex = Quake_Request(GET_ACTIVE_CAM(play), 1);
         Quake_SetSpeed(quakeIndex, 0x7FFF);
         Quake_SetQuakeValues(quakeIndex, 300, 0, 0, 0);
         Quake_SetCountdown(quakeIndex, 30);

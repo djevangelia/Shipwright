@@ -21,10 +21,10 @@ struct DynaPolyActor;
 #define BGCHECK_SUBDIV_OVERLAP 50
 #define BGCHECK_SUBDIV_MIN 150.0f
 
-#define FUNC_80041EA4_RESPAWN 5
-#define FUNC_80041EA4_MOUNT_WALL 6
-#define FUNC_80041EA4_STOP 8
-#define FUNC_80041EA4_VOID_OUT 12
+#define SurfaceType_GetFloorProperty_RESPAWN 5
+#define SurfaceType_GetFloorProperty_MOUNT_WALL 6
+#define SurfaceType_GetFloorProperty_STOP 8
+#define SurfaceType_GetFloorProperty_VOID_OUT 12
 
 #define WATERBOX_ROOM(p) ((p >> 13) & 0x3F)
 
@@ -70,6 +70,133 @@ typedef struct {
     // 0x0000_1F00 = Lighting Settings Index
     // 0x0000_00FF = CamData index
 } WaterBox; // size = 0x10
+
+typedef enum FloorType {
+    /*  0 */ FLOOR_TYPE_0,
+    /*  1 */ FLOOR_TYPE_1,
+    /*  2 */ FLOOR_TYPE_2, // Damage
+    /*  3 */ FLOOR_TYPE_3, // Damage
+    /*  4 */ FLOOR_TYPE_4, // Shallow sand
+    /*  5 */ FLOOR_TYPE_5,
+    /*  6 */ FLOOR_TYPE_6, // No fall damage (ex. Gerudo Fortress exterior walking areas)
+    /*  7 */ FLOOR_TYPE_7, // Quicksand (Haunted Wasteland ditch)
+    /*  8 */ FLOOR_TYPE_8, // Jabu surface
+    /*  9 */ FLOOR_TYPE_9,
+    /* 10 */ FLOOR_TYPE_10,
+    /* 11 */ FLOOR_TYPE_11, // Exit grotto (force look up)
+    /* 12 */ FLOOR_TYPE_12 // Quicksand (Haunted Wasteland below bombchu salesman)
+} FloorType;
+
+typedef enum WallType {
+    /*  0 */ WALL_TYPE_0,
+    /*  1 */ WALL_TYPE_1,
+    /*  2 */ WALL_TYPE_2,
+    /*  3 */ WALL_TYPE_3,
+    /*  4 */ WALL_TYPE_4,
+    /*  5 */ WALL_TYPE_5,
+    /*  6 */ WALL_TYPE_6,
+    /*  7 */ WALL_TYPE_7,
+    /*  8 */ WALL_TYPE_8,
+    /*  9 */ WALL_TYPE_9,
+    /* 10 */ WALL_TYPE_10,
+    /* 11 */ WALL_TYPE_11,
+    /* 12 */ WALL_TYPE_12,
+    /* 32 */ WALL_TYPE_MAX = 32
+} WallType;
+
+#define WALL_FLAG_0 (1 << 0)
+#define WALL_FLAG_1 (1 << 1) // Ladder
+#define WALL_FLAG_2 (1 << 2) // Top of ladder
+#define WALL_FLAG_3 (1 << 3) // Climbable
+#define WALL_FLAG_CRAWLSPACE_1 (1 << 4)
+#define WALL_FLAG_CRAWLSPACE_2 (1 << 5)
+#define WALL_FLAG_6 (1 << 6) // Grabbable dynapoly
+#define WALL_FLAG_CRAWLSPACE (WALL_FLAG_CRAWLSPACE_1 | WALL_FLAG_CRAWLSPACE_2)
+
+typedef enum FloorProperty {
+    /*  0 */ FLOOR_PROPERTY_0, // Normal floor property
+    /*  5 */ FLOOR_PROPERTY_5 = 5, // Trigger respawn. Used in Dampe's grave, Spirit Temple, DMT.
+    /*  6 */ FLOOR_PROPERTY_6, // Force grabbing ledge, no jump or fall. See: Volvagia boss platform edges.
+    /*  7 */ FLOOR_PROPERTY_7, // Prevent walking off edges. Only used in Chamber of Sages.
+    /*  8 */ FLOOR_PROPERTY_8, // Prevent XZ movement. Used on Spirit Temple statue and in Shooting Gallery + Bombchu Bowling.
+    /*  9 */ FLOOR_PROPERTY_9, // Force falling, no jump. However, the wall can be grabbed if climbable (func_8083A6AC). Also set for Hover Boots. See: Pot room mini-walls between windows.
+    /* 11 */ FLOOR_PROPERTY_11 = 11, // Able to jumpdive off ledge
+    /* 12 */ FLOOR_PROPERTY_12 // Trigger voidout. Used in Haunted Wasteland, Shadow Temple, Ice Cavern among others.
+} FloorProperty;
+
+typedef enum SurfaceSfxOffset {
+    /*  0 */ SURFACE_SFX_OFFSET_DIRT,
+    /*  1 */ SURFACE_SFX_OFFSET_SAND,
+    /*  2 */ SURFACE_SFX_OFFSET_STONE,
+    /*  3 */ SURFACE_SFX_OFFSET_JABU,
+    /*  4 */ SURFACE_SFX_OFFSET_WATER_SHALLOW,
+    /*  5 */ SURFACE_SFX_OFFSET_WATER_DEEP,
+    /*  6 */ SURFACE_SFX_OFFSET_TALL_GRASS,
+    /*  7 */ SURFACE_SFX_OFFSET_LAVA, // MAGMA?
+    /*  8 */ SURFACE_SFX_OFFSET_GRASS,
+    /*  9 */ SURFACE_SFX_OFFSET_CARPET,
+    /* 10 */ SURFACE_SFX_OFFSET_WOOD,
+    /* 11 */ SURFACE_SFX_OFFSET_BRIDGE, // WOOD_PLANK?
+    /* 12 */ SURFACE_SFX_OFFSET_VINE,
+    /* 13 */ SURFACE_SFX_OFFSET_IRON_BOOTS,
+    /* 14 */ SURFACE_SFX_OFFSET_UNUSED,
+    /* 15 */ SURFACE_SFX_OFFSET_ICE
+} SurfaceSfxOffset;
+
+typedef enum SurfaceMaterial {
+    /*  0 */ SURFACE_MATERIAL_DIRT,
+    /*  1 */ SURFACE_MATERIAL_SAND,
+    /*  2 */ SURFACE_MATERIAL_STONE,
+    /*  3 */ SURFACE_MATERIAL_JABU,
+    /*  4 */ SURFACE_MATERIAL_WATER_SHALLOW,
+    /*  5 */ SURFACE_MATERIAL_WATER_DEEP,
+    /*  6 */ SURFACE_MATERIAL_TALL_GRASS,
+    /*  7 */ SURFACE_MATERIAL_LAVA, // MAGMA?
+    /*  8 */ SURFACE_MATERIAL_GRASS,
+    /*  9 */ SURFACE_MATERIAL_BRIDGE, // WOOD_PLANK?
+    /* 10 */ SURFACE_MATERIAL_WOOD,
+    /* 11 */ SURFACE_MATERIAL_DIRT_SOFT,
+    /* 12 */ SURFACE_MATERIAL_ICE,
+    /* 13 */ SURFACE_MATERIAL_CARPET,
+    /* 14 */ SURFACE_MATERIAL_MAX
+} SurfaceMaterial;
+
+typedef enum FloorEffect {
+    /*  0 */ FLOOR_EFFECT_0,
+    /*  1 */ FLOOR_EFFECT_1, // Sliding
+    /*  2 */ FLOOR_EFFECT_2 // Transition
+} FloorEffect;
+
+typedef enum ConveyorSpeed {
+    /*  0 */ CONVEYOR_SPEED_DISABLED,
+    /*  1 */ CONVEYOR_SPEED_SLOW,
+    /*  2 */ CONVEYOR_SPEED_MEDIUM,
+    /*  3 */ CONVEYOR_SPEED_FAST,
+    /*  4 */ CONVEYOR_SPEED_MAX
+} ConveyorSpeed;
+
+#define CONVEYOR_DIRECTION_TO_BINANG(conveyorDirection) ((conveyorDirection) * (0x10000 / 64))
+#define CONVEYOR_DIRECTION_FROM_BINANG(conveyorDirectionBinang) ((conveyorDirectionBinang) / (0x10000 / 64))
+
+#define SURFACETYPE0(bgCamIndex, exitIndex, floorType, unk18, wallType, floorProperty, isSoft, isHorseBlocked) \
+    ((((bgCamIndex)     & 0xFF) <<  0) | \
+     (((exitIndex)      & 0x1F) <<  8) | \
+     (((floorType)      & 0x1F) << 13) | \
+     (((unk18)          & 0x07) << 18) | \
+     (((wallType)       & 0x1F) << 21) | \
+     (((floorProperty)  & 0x0F) << 26) | \
+     (((isSoft)         &    1) << 30) | \
+     (((isHorseBlocked) &    1) << 31))
+
+#define SURFACETYPE1(material, floorEffect, lightSetting, echo, canHookshot, conveyorSpeed, conveyorDirection, unk27) \
+    ((((material)          & 0x0F) <<  0) | \
+     (((floorEffect)       & 0x03) <<  4) | \
+     (((lightSetting)      & 0x1F) <<  6) | \
+     (((echo)              & 0x3F) << 11) | \
+     (((canHookshot)       &    1) << 17) | \
+     (((conveyorSpeed)     & 0x07) << 18) | \
+     (((conveyorDirection) & 0x3F) << 21) | \
+     (((unk27)             &    1) << 27))
 
 typedef struct {
     u32 data[2];

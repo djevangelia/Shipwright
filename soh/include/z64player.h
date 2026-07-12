@@ -629,7 +629,7 @@ typedef struct PlayerAgeProperties {
     /* 0x94 */ u16 unk_94;
     /* 0x98 */ LinkAnimationHeader* unk_98;
     /* 0x9C */ LinkAnimationHeader* unk_9C;
-    /* 0xA0 */ LinkAnimationHeader* unk_A0;
+    /* 0xA0 */ LinkAnimationHeader* timeTravelEndAnim;
     /* 0xA4 */ LinkAnimationHeader* unk_A4;
     /* 0xA8 */ LinkAnimationHeader* unk_A8;
     /* 0xAC */ LinkAnimationHeader* unk_AC[4];

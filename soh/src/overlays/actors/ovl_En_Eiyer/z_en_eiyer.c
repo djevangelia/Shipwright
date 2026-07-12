@@ -565,7 +565,7 @@ void EnEiyer_Die(EnEiyer* this, PlayState* play) {
 
     this->actor.world.rot.x = -this->actor.shape.rot.x;
 
-    if (this->timer == 0 || this->actor.bgCheckFlags & 0x10) {
+    if (this->timer == 0 || this->actor.bgCheckFlags & BGCHECKFLAG_CEILING) {
         EnEiyer_SetupDead(this);
     }
 }

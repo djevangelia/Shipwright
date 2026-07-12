@@ -280,7 +280,7 @@ void EnBomChu_Move(EnBomChu* this, PlayState* play) {
 
     if (BgCheck_EntityLineTest1(&play->colCtx, &posA, &posB, &posUpDown, &polyUpDown, true, true, true, true,
                                 &bgIdUpDown) &&
-        !(func_80041DB8(&play->colCtx, polyUpDown, bgIdUpDown) & 0x30) && // && not crawl space?
+        !(SurfaceType_GetWallFlags(&play->colCtx, polyUpDown, bgIdUpDown) & 0x30) && // && not crawl space?
         !SurfaceType_IsIgnoredByProjectiles(&play->colCtx, polyUpDown, bgIdUpDown)) {
         // forwards
         posB.x = (this->axisForwards.x * lineLength) + posA.x;
@@ -289,7 +289,7 @@ void EnBomChu_Move(EnBomChu* this, PlayState* play) {
 
         if (BgCheck_EntityLineTest1(&play->colCtx, &posA, &posB, &posSide, &polySide, true, true, true, true,
                                     &bgIdSide) &&
-            !(func_80041DB8(&play->colCtx, polySide, bgIdSide) & 0x30) &&
+            !(SurfaceType_GetWallFlags(&play->colCtx, polySide, bgIdSide) & 0x30) &&
             !SurfaceType_IsIgnoredByProjectiles(&play->colCtx, polySide, bgIdSide)) {
             EnBomChu_UpdateFloorPoly(this, polySide, play);
             this->actor.world.pos = posSide;
@@ -328,7 +328,7 @@ void EnBomChu_Move(EnBomChu* this, PlayState* play) {
 
             if (BgCheck_EntityLineTest1(&play->colCtx, &posA, &posB, &posSide, &polySide, true, true, true, true,
                                         &bgIdSide) &&
-                !(func_80041DB8(&play->colCtx, polySide, bgIdSide) & 0x30) &&
+                !(SurfaceType_GetWallFlags(&play->colCtx, polySide, bgIdSide) & 0x30) &&
                 !SurfaceType_IsIgnoredByProjectiles(&play->colCtx, polySide, bgIdSide)) {
                 EnBomChu_UpdateFloorPoly(this, polySide, play);
                 this->actor.world.pos = posSide;
@@ -460,13 +460,13 @@ void EnBomChu_Update(Actor* thisx, PlayState* play2) {
             this->actor.yDistToWater = waterY - this->actor.world.pos.y;
 
             if (this->actor.yDistToWater < 0.0f) {
-                if (this->actor.bgCheckFlags & 0x20) {
+                if (this->actor.bgCheckFlags & BGCHECKFLAG_WATER) {
                     EnBomChu_SpawnRipples(this, play, waterY);
                 }
 
                 this->actor.bgCheckFlags &= ~0x20;
             } else {
-                if (!(this->actor.bgCheckFlags & 0x20) && (this->timer != 120)) {
+                if (!(this->actor.bgCheckFlags & BGCHECKFLAG_WATER) && (this->timer != 120)) {
                     EnBomChu_SpawnRipples(this, play, waterY);
                 } else {
                     EffectSsBubble_Spawn(play, &this->actor.world.pos, 0.0f, 3.0f, 15.0f, 0.25f);

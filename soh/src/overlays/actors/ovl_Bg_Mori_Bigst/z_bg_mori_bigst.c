@@ -180,7 +180,7 @@ void BgMoriBigst_SetupLanding(BgMoriBigst* this, PlayState* play) {
 
     BgMoriBigst_SetupAction(this, BgMoriBigst_Landing);
     this->waitTimer = 18;
-    quake = Quake_Add(GET_ACTIVE_CAM(play), 3);
+    quake = Quake_Request(GET_ACTIVE_CAM(play), 3);
     Quake_SetSpeed(quake, 25000);
     Quake_SetQuakeValues(quake, 5, 0, 0, 0);
     Quake_SetCountdown(quake, 16);
@@ -246,7 +246,7 @@ void BgMoriBigst_Update(Actor* thisx, PlayState* play) {
         this->waitTimer--;
     }
     if (DynaPolyActor_IsPlayerAbove(&this->dyna)) {
-        func_80074CE8(play, 6);
+        fEnvironment_ChangeLightSetting8(play, 6);
     }
     if (this->actionFunc != NULL) {
         this->actionFunc(this, play);

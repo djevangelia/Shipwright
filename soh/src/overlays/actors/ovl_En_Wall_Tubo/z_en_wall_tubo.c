@@ -92,7 +92,7 @@ void EnWallTubo_DetectChu(EnWallTubo* this, PlayState* play) {
                     Sfx_PlaySfxCentered(NA_SE_SY_TRE_BOX_APPEAR);
                     this->timer = 60;
                     EffectSsBomb2_SpawnLayered(play, &this->explosionCenter, &effVelocity, &effAccel, 200, 40);
-                    quakeIndex = Quake_Add(GET_ACTIVE_CAM(play), 1);
+                    quakeIndex = Quake_Request(GET_ACTIVE_CAM(play), 1);
                     Quake_SetSpeed(quakeIndex, 0x7FFF);
                     Quake_SetQuakeValues(quakeIndex, 100, 0, 0, 0);
                     Quake_SetCountdown(quakeIndex, 100);

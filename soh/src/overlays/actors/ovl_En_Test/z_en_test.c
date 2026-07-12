@@ -1725,7 +1725,7 @@ void EnTest_Update(Actor* thisx, PlayState* play) {
                 this->actor.floorHeight = this->actor.home.pos.y;
             }
         } else if (this->actor.bgCheckFlags & 2) {
-            floorProperty = func_80041EA4(&play->colCtx, this->actor.floorPoly, this->actor.floorBgId);
+            floorProperty = SurfaceType_GetFloorProperty(&play->colCtx, this->actor.floorPoly, this->actor.floorBgId);
 
             if ((floorProperty == 5) || (floorProperty == 0xC) ||
                 SurfaceType_GetFloorType(&play->colCtx, this->actor.floorPoly, this->actor.floorBgId) == 9) {

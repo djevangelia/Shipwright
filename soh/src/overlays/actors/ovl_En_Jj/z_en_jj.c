@@ -221,7 +221,7 @@ void EnJj_BeginCutscene(EnJj* this, PlayState* play) {
         play->csCtx.segment = &D_80A88164;
         gSaveContext.cutsceneTrigger = 1;
         func_8003EBF8(play, &play->colCtx.dyna, bodyCollisionActor->bgId);
-        func_8005B1A4(GET_ACTIVE_CAM(play));
+        Camera_SetFinishedFlag(GET_ACTIVE_CAM(play));
         Flags_SetEventChkInf(EVENTCHKINF_OFFERED_FISH_TO_JABU_JABU);
         Sfx_PlaySfxCentered(NA_SE_SY_CORRECT_CHIME);
     }

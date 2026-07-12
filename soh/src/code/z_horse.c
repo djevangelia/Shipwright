@@ -51,7 +51,8 @@ void Horse_SetupInGameplay(PlayState* play, Player* player) {
         { SCENE_LON_LON_RANCH, 928, 0, -2280, 0, 2 },
     };
 
-    if ((AREG(6) != 0) && (Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) || (DREG(1) != 0))) {
+    if ((R_EXITED_SCENE_RIDING_HORSE != 0) &&
+        (Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) || (R_DEBUG_FORCE_EPONA_OBTAINED != 0))) {
         player->rideActor = Actor_Spawn(&play->actorCtx, play, ACTOR_EN_HORSE, player->actor.world.pos.x,
                                         player->actor.world.pos.y, player->actor.world.pos.z, player->actor.shape.rot.x,
                                         player->actor.shape.rot.y, player->actor.shape.rot.z, 9);
@@ -82,10 +83,10 @@ void Horse_SetupInGameplay(PlayState* play, Player* player) {
                                 GameInteractor_Should(VB_HAVE_OCARINA_NOTE_B4, true) &&
                                 GameInteractor_Should(VB_HAVE_OCARINA_NOTE_A4, true) &&
                                 (INV_CONTENT(ITEM_OCARINA_FAIRY) != ITEM_NONE)))) ||
-                DREG(1) != 0)) {
+                R_DEBUG_FORCE_EPONA_OBTAINED != 0)) {
         // "Set by existence of horse %d %d %d"
         osSyncPrintf("馬存在によるセット %d %d %d\n", gSaveContext.horseData.scene,
-                     Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED), DREG(1));
+                     Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED), R_DEBUG_FORCE_EPONA_OBTAINED);
 
         if (Horse_CanSpawn(gSaveContext.horseData.scene)) {
             Actor* horseActor = Actor_Spawn(&play->actorCtx, play, ACTOR_EN_HORSE, gSaveContext.horseData.pos.x,
@@ -103,10 +104,10 @@ void Horse_SetupInGameplay(PlayState* play, Player* player) {
             Horse_ResetHorseData(play);
         }
     } else if ((play->sceneNum == SCENE_LON_LON_RANCH) && !Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) &&
-               (DREG(1) == 0)) {
+               (R_DEBUG_FORCE_EPONA_OBTAINED == 0)) {
         Actor* horseActor = Actor_Spawn(&play->actorCtx, play, ACTOR_EN_HORSE, 0.0f, 0.0f, -500.0f, 0, 0, 0, 1);
         assert(horseActor != NULL);
-    } else if (Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) || (DREG(1) != 0)) {
+    } else if (Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) || (R_DEBUG_FORCE_EPONA_OBTAINED != 0)) {
         for (i = 0; i < ARRAY_COUNT(horseSpawns); i++) {
             HorseSpawn* horseSpawn = &horseSpawns[i];
             if (horseSpawn->scene == play->sceneNum) {
@@ -122,7 +123,7 @@ void Horse_SetupInGameplay(PlayState* play, Player* player) {
             }
         }
     } else if (!Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED)) {
-        if ((DREG(1) == 0) && (play->sceneNum == SCENE_LON_LON_BUILDINGS) && !IS_DAY) {
+        if ((R_DEBUG_FORCE_EPONA_OBTAINED == 0) && (play->sceneNum == SCENE_LON_LON_BUILDINGS) && !IS_DAY) {
             Actor_Spawn(&play->actorCtx, play, ACTOR_EN_HORSE, 0.0f, 0.0f, -60.0f, 0, 0x7360, 0, 1);
         }
     }
@@ -169,7 +170,7 @@ void Horse_SetupInCutscene(PlayState* play, Player* player) {
         Actor_RequestHorseCameraSetting(play, player);
         gSaveContext.horseData.scene = play->sceneNum;
     } else if ((play->sceneNum == SCENE_LON_LON_RANCH) && ((gSaveContext.eventInf[0] & 0xF) == 6) &&
-               (Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) == 0) && (DREG(1) == 0)) {
+               (Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) == 0) && (R_DEBUG_FORCE_EPONA_OBTAINED == 0)) {
         player->rideActor =
             Actor_Spawn(&play->actorCtx, play, ACTOR_EN_HORSE, 894.0f, 0.0f, -2084.0f, 0, -0x7FFF, 0, 5);
         assert(player->rideActor != NULL);
@@ -265,7 +266,7 @@ void Horse_InitPlayerHorse(PlayState* play, Player* player) {
                   gSaveContext.entranceIndex == ENTR_HYRULE_FIELD_15) &&
                  (gSaveContext.respawnFlag == 0)) ||
                 ((play->sceneNum == SCENE_LON_LON_RANCH) && ((gSaveContext.eventInf[0] & 0xF) == 6) &&
-                 !Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) && (DREG(1) == 0))) {
+                 !Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) && (R_DEBUG_FORCE_EPONA_OBTAINED == 0))) {
                 Horse_SetupInCutscene(play, player);
             } else {
                 Horse_SetupInGameplay(play, player);

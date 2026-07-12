@@ -307,7 +307,7 @@ void func_80888860(BgHidanHamstep* this, PlayState* play) {
             this->dyna.actor.velocity.y *= -0.24f;
 
             if (this->unk_244 == 1) {
-                quakeIndex = Quake_Add(GET_ACTIVE_CAM(play), 3);
+                quakeIndex = Quake_Request(GET_ACTIVE_CAM(play), 3);
                 Quake_SetSpeed(quakeIndex, -15536);
                 Quake_SetQuakeValues(quakeIndex, 0, 0, 500, 0);
                 Quake_SetCountdown(quakeIndex, 20);
@@ -364,7 +364,7 @@ void func_80888A58(BgHidanHamstep* this, PlayState* play) {
             this->dyna.actor.velocity.y *= -0.24f;
 
             if (this->unk_244 == 1) {
-                quakeIndex = Quake_Add(GET_ACTIVE_CAM(play), 3);
+                quakeIndex = Quake_Request(GET_ACTIVE_CAM(play), 3);
                 Quake_SetSpeed(quakeIndex, -15536);
                 Quake_SetQuakeValues(quakeIndex, 20, 1, 0, 0);
                 Quake_SetCountdown(quakeIndex, 7);

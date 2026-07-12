@@ -293,7 +293,7 @@ void Quake_Init(void) {
     sQuakeRequestCount = 0;
 }
 
-s16 Quake_Add(Camera* cam, u32 callbackIdx) {
+s16 Quake_Request(Camera* cam, u32 callbackIdx) {
     return Quake_AddImpl(cam, callbackIdx)->randIdx;
 }
 

@@ -62,7 +62,8 @@ static void RegisterFixVineFall() {
                     player->actor.wallYaw = Math_Atan2S(wallPoly->normal.z, wallPoly->normal.x);
                     *yawDiff = player->actor.shape.rot.y - (s16)(player->actor.wallYaw + 0x8000);
 
-                    *touchedWallFlags = func_80041DB8(&play->colCtx, player->actor.wallPoly, player->actor.wallBgId);
+                    *touchedWallFlags =
+                        SurfaceType_GetWallFlags(&play->colCtx, player->actor.wallPoly, player->actor.wallBgId);
                 }
             }
         });

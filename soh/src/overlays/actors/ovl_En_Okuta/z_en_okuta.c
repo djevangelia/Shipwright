@@ -485,7 +485,7 @@ void EnOkuta_ProjectileFly(EnOkuta* this, PlayState* play) {
         this->actor.gravity = -1.0f;
     }
     this->actor.home.rot.z += 0x1554;
-    if (this->actor.bgCheckFlags & 0x20) {
+    if (this->actor.bgCheckFlags & BGCHECKFLAG_WATER) {
         this->actor.gravity = -1.0f;
         this->actor.speedXZ -= 0.1f;
         this->actor.speedXZ = CLAMP_MIN(this->actor.speedXZ, 1.0f);

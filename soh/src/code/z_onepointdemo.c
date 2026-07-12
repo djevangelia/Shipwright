@@ -157,7 +157,7 @@ s32 OnePointCutscene_SetInfo(PlayState* play, s16 camIdx, s16 csId, Actor* actor
                 ((mainCam->play->state.frames & 1) ? 3.0f : -3.0f) + Rand_ZeroOne();
             func_800C0808(play, camIdx, player, CAM_SET_CS_C);
 
-            i = Quake_Add(csCam, 5);
+            i = Quake_Request(csCam, 5);
             Quake_SetSpeed(i, 400);
             Quake_SetQuakeValues(i, 4, 5, 40, 0x3C);
             Quake_SetCountdown(i, 1600);
@@ -178,7 +178,7 @@ s32 OnePointCutscene_SetInfo(PlayState* play, s16 camIdx, s16 csId, Actor* actor
                 ((mainCam->play->state.frames & 1) ? 3.0f : -3.0f) + Rand_ZeroOne();
             func_800C0808(play, camIdx, player, CAM_SET_CS_C);
 
-            i = Quake_Add(csCam, 5);
+            i = Quake_Request(csCam, 5);
             Quake_SetSpeed(i, 400);
             Quake_SetQuakeValues(i, 2, 3, 200, 0x32);
             Quake_SetCountdown(i, 9999);
@@ -189,7 +189,7 @@ s32 OnePointCutscene_SetInfo(PlayState* play, s16 camIdx, s16 csId, Actor* actor
 
             func_800C0808(play, camIdx, player, CAM_SET_CS_C);
 
-            i = Quake_Add(csCam, 5);
+            i = Quake_Request(csCam, 5);
             Quake_SetSpeed(i, 400);
             Quake_SetQuakeValues(i, 2, 2, 50, 0);
             Quake_SetCountdown(i, 280);
@@ -211,7 +211,7 @@ s32 OnePointCutscene_SetInfo(PlayState* play, s16 camIdx, s16 csId, Actor* actor
 
             func_800C0808(play, camIdx, player, CAM_SET_CS_C);
 
-            i = Quake_Add(csCam, 5);
+            i = Quake_Request(csCam, 5);
             Quake_SetSpeed(i, 400);
             Quake_SetQuakeValues(i, 2, 2, 50, 0);
             Quake_SetCountdown(i, 60);
@@ -403,7 +403,7 @@ s32 OnePointCutscene_SetInfo(PlayState* play, s16 camIdx, s16 csId, Actor* actor
 
             func_800C0808(play, camIdx, player, CAM_SET_CS_C);
 
-            i = Quake_Add(csCam, 3);
+            i = Quake_Request(csCam, 3);
             Quake_SetSpeed(i, 22000);
             Quake_SetQuakeValues(i, 2, 0, 200, 0);
             Quake_SetCountdown(i, 10);
@@ -441,7 +441,7 @@ s32 OnePointCutscene_SetInfo(PlayState* play, s16 camIdx, s16 csId, Actor* actor
             Player_SetCsActionWithHaltedActors(play, NULL, 8);
             func_800C0808(play, camIdx, player, CAM_SET_CS_C);
 
-            i = Quake_Add(csCam, 1);
+            i = Quake_Request(csCam, 1);
             Quake_SetSpeed(i, 24000);
             Quake_SetQuakeValues(i, 2, 0, 0, 0);
             Quake_SetCountdown(i, 160);
@@ -473,7 +473,7 @@ s32 OnePointCutscene_SetInfo(PlayState* play, s16 camIdx, s16 csId, Actor* actor
             D_8012021C[D_801202FC - 3].pos.z +=
                 (D_8012021C[D_801202FC - 2].pos.z - D_8012021C[D_801202FC - 3].pos.z) / 2;
 
-            i = Quake_Add(mainCam, 3);
+            i = Quake_Request(mainCam, 3);
             Quake_SetSpeed(i, 30000);
             Quake_SetQuakeValues(i, 2, 1, 1, 0);
             Quake_SetCountdown(i, 200);
@@ -481,7 +481,7 @@ s32 OnePointCutscene_SetInfo(PlayState* play, s16 camIdx, s16 csId, Actor* actor
         case 3120:
             csInfo->keyFrames = D_80121954[-(timer + 101)];
             csCam->timer = 100;
-            csCam->unk_14C |= 2;
+            csCam->stateFlags |= 2;
             csInfo->keyFrameCnt = 2;
 
             Player_SetCsActionWithHaltedActors(play, NULL, 8);
@@ -493,7 +493,7 @@ s32 OnePointCutscene_SetInfo(PlayState* play, s16 camIdx, s16 csId, Actor* actor
 
             Player_SetCsActionWithHaltedActors(play, NULL, 8);
             func_800C0808(play, camIdx, player, CAM_SET_CS_C);
-            csCam->unk_14C |= 2;
+            csCam->stateFlags |= 2;
             break;
         case 3140:
             D_80121C24[0].atTargetInit = play->view.lookAt;
@@ -589,7 +589,7 @@ s32 OnePointCutscene_SetInfo(PlayState* play, s16 camIdx, s16 csId, Actor* actor
             OnePointCutscene_AddVecSphToVec3f(&spB4, &spC0, &spD0);
             Play_CameraSetAtEye(play, CAM_ID_MAIN, &spC0, &spB4);
 
-            i = Quake_Add(csCam, 3);
+            i = Quake_Request(csCam, 3);
             Quake_SetSpeed(i, 22000);
             Quake_SetQuakeValues(i, 1, 0, 0, 0);
             Quake_SetCountdown(i, 90);
@@ -643,7 +643,7 @@ s32 OnePointCutscene_SetInfo(PlayState* play, s16 camIdx, s16 csId, Actor* actor
                 OnePointCutscene_SetCsCamPoints(csCam, D_801208E8, D_801208E4, D_801206A0, D_80120760);
             }
 
-            i = Quake_Add(csCam, 1);
+            i = Quake_Request(csCam, 1);
             Quake_SetSpeed(i, 32000);
             Quake_SetQuakeValues(i, 0, 0, 20, 0);
             Quake_SetCountdown(i, D_801208E4 - 10);
@@ -655,7 +655,7 @@ s32 OnePointCutscene_SetInfo(PlayState* play, s16 camIdx, s16 csId, Actor* actor
             OnePointCutscene_Vec3sToVec3f(&mainCam->eye, &D_801205B4[D_80120694 - 2].pos);
             OnePointCutscene_Vec3sToVec3f(&mainCam->at, &D_801204D4[D_80120694 - 2].pos);
 
-            i = Quake_Add(csCam, 1);
+            i = Quake_Request(csCam, 1);
             Quake_SetSpeed(i, 0x4E20);
             Quake_SetQuakeValues(i, 1, 0, 50, 0);
             Quake_SetCountdown(i, D_80120698 - 20);
@@ -674,7 +674,7 @@ s32 OnePointCutscene_SetInfo(PlayState* play, s16 camIdx, s16 csId, Actor* actor
             Player_SetCsActionWithHaltedActors(play, NULL, 8);
             Play_CopyCamera(play, camIdx, CAM_ID_MAIN);
 
-            i = Quake_Add(csCam, 1);
+            i = Quake_Request(csCam, 1);
             Quake_SetSpeed(i, 32000);
             Quake_SetQuakeValues(i, 2, 0, 0, 0);
             Quake_SetCountdown(i, timer);
@@ -691,7 +691,7 @@ s32 OnePointCutscene_SetInfo(PlayState* play, s16 camIdx, s16 csId, Actor* actor
 
             func_800C0808(play, camIdx, player, CAM_SET_CS_C);
 
-            i = Quake_Add(csCam, 3);
+            i = Quake_Request(csCam, 3);
             Quake_SetSpeed(i, 12000);
             Quake_SetQuakeValues(i, 0, 0, 1000, 0);
             Quake_SetCountdown(i, 5);
@@ -707,7 +707,7 @@ s32 OnePointCutscene_SetInfo(PlayState* play, s16 camIdx, s16 csId, Actor* actor
             Player_SetCsActionWithHaltedActors(play, NULL, 8);
             func_800C0808(play, camIdx, player, CAM_SET_CS_C);
 
-            i = Quake_Add(csCam, 3);
+            i = Quake_Request(csCam, 3);
             Quake_SetSpeed(i, 12000);
             Quake_SetQuakeValues(i, 0, 0, 1000, 0);
             Quake_SetCountdown(i, 5);
@@ -752,7 +752,7 @@ s32 OnePointCutscene_SetInfo(PlayState* play, s16 camIdx, s16 csId, Actor* actor
             Player_SetCsActionWithHaltedActors(play, NULL, 8);
             func_800C0808(play, camIdx, player, CAM_SET_CS_C);
 
-            i = Quake_Add(csCam, 1);
+            i = Quake_Request(csCam, 1);
             Quake_SetSpeed(i, 32000);
             Quake_SetQuakeValues(i, 4, 0, 0, 0);
             Quake_SetCountdown(i, 20);
@@ -764,7 +764,7 @@ s32 OnePointCutscene_SetInfo(PlayState* play, s16 camIdx, s16 csId, Actor* actor
             Player_SetCsAction(play, &player->actor, 8);
             func_800C0808(play, camIdx, player, CAM_SET_CS_C);
 
-            i = Quake_Add(csCam, 1);
+            i = Quake_Request(csCam, 1);
             Quake_SetSpeed(i, 32000);
             Quake_SetQuakeValues(i, 2, 0, 0, 0);
             Quake_SetCountdown(i, 10);
@@ -778,7 +778,7 @@ s32 OnePointCutscene_SetInfo(PlayState* play, s16 camIdx, s16 csId, Actor* actor
             player->stateFlags1 |= PLAYER_STATE1_IN_CUTSCENE;
             player->actor.freezeTimer = 90;
 
-            i = Quake_Add(csCam, 1);
+            i = Quake_Request(csCam, 1);
             Quake_SetSpeed(i, 32000);
             Quake_SetQuakeValues(i, 2, 0, 0, 0);
             Quake_SetCountdown(i, 10);
@@ -790,7 +790,7 @@ s32 OnePointCutscene_SetInfo(PlayState* play, s16 camIdx, s16 csId, Actor* actor
             Player_SetCsActionWithHaltedActors(play, NULL, 8);
             func_800C0808(play, camIdx, player, CAM_SET_CS_C);
 
-            i = Quake_Add(csCam, 1);
+            i = Quake_Request(csCam, 1);
             Quake_SetSpeed(i, 32000);
             Quake_SetQuakeValues(i, 1, 0, 10, 0);
             Quake_SetCountdown(i, 20);
@@ -873,7 +873,7 @@ s32 OnePointCutscene_SetInfo(PlayState* play, s16 camIdx, s16 csId, Actor* actor
 
             func_800C0808(play, camIdx, player, CAM_SET_CS_C);
 
-            i = Quake_Add(csCam, 3);
+            i = Quake_Request(csCam, 3);
             Quake_SetSpeed(i, 12000);
             Quake_SetQuakeValues(i, 0, 1, 100, 0);
             Quake_SetCountdown(i, timer - 80);
@@ -887,7 +887,7 @@ s32 OnePointCutscene_SetInfo(PlayState* play, s16 camIdx, s16 csId, Actor* actor
                 Player_SetCsAction(play, &player->actor, 1);
             }
 
-            i = Quake_Add(csCam, 3);
+            i = Quake_Request(csCam, 3);
             Quake_SetSpeed(i, 12000);
             Quake_SetQuakeValues(i, 0, 1, 10, 0);
             Quake_SetCountdown(i, timer - 10);

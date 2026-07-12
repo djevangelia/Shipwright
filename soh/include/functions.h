@@ -681,15 +681,15 @@ u32 SurfaceType_GetSceneExitIndex(CollisionContext* colCtx, CollisionPoly* poly,
 u32 SurfaceType_GetFloorType(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
 u32 func_80041D70(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
 u32 func_80041D94(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
-s32 func_80041DB8(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
-s32 func_80041DE4(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
-s32 func_80041E18(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
+s32 SurfaceType_GetWallFlags(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
+s32 SurfaceType_CheckWallFlag0(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
+s32 SurfaceType_CheckWallFlag1(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
 s32 func_80041E4C(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
 s32 func_80041E80(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
-u32 func_80041EA4(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
+u32 SurfaceType_GetFloorProperty(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
 u32 func_80041EC8(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
 u32 SurfaceType_IsHorseBlocked(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
-u32 func_80041F10(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
+u32 SurfaceType_GetMaterial(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
 u16 SurfaceType_GetSfx(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
 u32 SurfaceType_GetSlope(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
 u32 SurfaceType_GetLightSettingIndex(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
@@ -755,7 +755,7 @@ Vec3f* Camera_GetSkyboxOffset(Vec3f* dst, Camera* camera);
 void Camera_SetCameraData(Camera* camera, s16 setDataFlags, void* data0, void* data1, s16 data2, s16 data3,
                           UNK_TYPE arg6);
 s32 func_8005B198(void);
-s16 func_8005B1A4(Camera* camera);
+s16 Camera_SetFinishedFlag(Camera* camera);
 DamageTable* DamageTable_Get(s32 index);
 void DamageTable_Clear(DamageTable* table);
 void Collider_DrawRedPoly(GraphicsContext* gfxCtx, Vec3f* vA, Vec3f* vB, Vec3f* vC);
@@ -925,7 +925,7 @@ void Environment_DrawSunLensFlare(PlayState* play, EnvironmentContext* envCtx, V
 void Environment_DrawLensFlare(PlayState* play, EnvironmentContext* envCtx, View* view,
                                GraphicsContext* gfxCtx, Vec3f pos, s32 unused, s16 arg6, f32 arg7, s16 arg8, u8 arg9);
 void Environment_DrawRain(PlayState* play, View* view, GraphicsContext* gfxCtx);
-void func_80074CE8(PlayState* play, u32 arg1);
+void fEnvironment_ChangeLightSetting8(PlayState* play, u32 arg1);
 void Environment_DrawSkyboxFilters(PlayState* play);
 void Environment_UpdateLightningStrike(PlayState* play);
 void Environment_AddLightningBolts(PlayState* play, u8 num);
@@ -1176,7 +1176,7 @@ s16 Quake_GetCountdown(s16 idx);
 u32 Quake_SetQuakeValues(s16 idx, s16 y, s16 x, s16 zoom, s16 rotZ);
 u32 Quake_SetUnkValues(s16 idx, s16 arg1, SubQuakeRequest14 arg2);
 void Quake_Init(void);
-s16 Quake_Add(Camera* cam, u32 callbackIdx);
+s16 Quake_Request(Camera* cam, u32 callbackIdx);
 u32 Quake_RemoveFromIdx(s16 idx);
 s16 Quake_Calc(Camera* camera, QuakeCamCalc* camData);
 Gfx* Gfx_SetFog(Gfx* gfx, s32 r, s32 g, s32 b, s32 a, s32 near, s32 far);

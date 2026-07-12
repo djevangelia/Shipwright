@@ -384,7 +384,7 @@ void EnKusa_Fall(EnKusa* this, PlayState* play) {
     Vec3f contactPos;
 
     if (this->actor.bgCheckFlags & 0xB) {
-        if (!(this->actor.bgCheckFlags & 0x20)) {
+        if (!(this->actor.bgCheckFlags & BGCHECKFLAG_WATER)) {
             SoundSource_PlaySfxAtFixedWorldPos(play, &this->actor.world.pos, 20, NA_SE_EV_PLANT_BROKEN);
             gSaveContext.ship.stats.count[COUNT_BUSHES_CUT]++;
         }

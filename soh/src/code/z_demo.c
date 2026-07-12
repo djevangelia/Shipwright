@@ -320,7 +320,7 @@ void func_80064824(PlayState* play, CutsceneContext* csCtx, CsCmdBase* cmd) {
             break;
         case 16:
             if (sp3F != 0) {
-                sQuakeIndex = Quake_Add(GET_ACTIVE_CAM(play), 6);
+                sQuakeIndex = Quake_Request(GET_ACTIVE_CAM(play), 6);
                 Quake_SetSpeed(sQuakeIndex, 0x7FFF);
                 Quake_SetQuakeValues(sQuakeIndex, 4, 0, 1000, 0);
                 Quake_SetCountdown(sQuakeIndex, 800);
@@ -2119,7 +2119,7 @@ void func_80068DC0(PlayState* play, CutsceneContext* csCtx) {
 
             Play_ChangeCameraStatus(play, D_8015FCC6, CAM_STAT_ACTIVE);
             Play_ClearCamera(play, csCtx->unk_14);
-            func_8005B1A4(play->cameraPtrs[D_8015FCC6]);
+            Camera_SetFinishedFlag(play->cameraPtrs[D_8015FCC6]);
         }
 
         Audio_SetCutsceneFlag(0);

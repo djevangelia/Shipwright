@@ -349,7 +349,7 @@ void EnAttackNiw_Update(Actor* thisx, PlayState* play) {
         return;
     }
 
-    if ((this->actor.bgCheckFlags & 0x20) && (this->actionFunc != func_809B5C18)) {
+    if ((this->actor.bgCheckFlags & BGCHECKFLAG_WATER) && (this->actionFunc != func_809B5C18)) {
         Math_Vec3f_Copy(&sp30, &this->actor.world.pos);
         sp30.y += this->actor.yDistToWater;
         EffectSsGSplash_Spawn(play, &sp30, 0, 0, 0, 0x190);

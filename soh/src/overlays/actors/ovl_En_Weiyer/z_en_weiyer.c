@@ -473,7 +473,7 @@ void EnWeiyer_Die(EnWeiyer* this, PlayState* play) {
         this->timer--;
     }
 
-    if ((this->timer == 0) || (this->actor.bgCheckFlags & 0x10)) {
+    if ((this->timer == 0) || (this->actor.bgCheckFlags & BGCHECKFLAG_CEILING)) {
         EnWeiyer_SetupDead(this);
     }
 }
@@ -552,7 +552,7 @@ void EnWeiyer_OutOfWater(EnWeiyer* this, PlayState* play) {
 
         if (this->actor.bgCheckFlags & 1) {
             EnWeiyer_SetupTurnAround(this);
-        } else if ((this->actor.bgCheckFlags & 0x20) && (this->actor.shape.rot.x > 0)) {
+        } else if ((this->actor.bgCheckFlags & BGCHECKFLAG_WATER) && (this->actor.shape.rot.x > 0)) {
             EffectSsGSplash_Spawn(play, &this->actor.world.pos, NULL, NULL, 1, 400);
             Audio_PlayActorSound2(&this->actor, NA_SE_EN_OCTAROCK_SINK);
             EnWeiyer_SetupInactive(this);

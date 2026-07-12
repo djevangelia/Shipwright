@@ -53,6 +53,11 @@ typedef struct {
     /* 0x05 */ u8 damage; // Damage or Stun Timer
 } ColliderTouch; // size = 0x08
 
+typedef enum HitBacklash {
+    HIT_BACKLASH_NONE,
+    HIT_BACKLASH_ELECTRIC
+} HitBacklash;
+
 typedef struct {
     /* 0x00 */ u32 dmgFlags;  // Bumper damage type flags.
     /* 0x04 */ u8 effect;  // Damage Effect (Knockback, Fire, etc.)

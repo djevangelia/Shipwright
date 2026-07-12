@@ -227,7 +227,7 @@ void BgBdanObjects_OctoPlatform_WaitForRutoToAdvanceCutscene(BgBdanObjects* this
     if (this->timer != 0) {
         this->timer--;
         if (this->timer == 0) {
-            temp = Quake_Add(GET_ACTIVE_CAM(play), 1);
+            temp = Quake_Request(GET_ACTIVE_CAM(play), 1);
             Quake_SetSpeed(temp, 0x3A98);
             Quake_SetQuakeValues(temp, 0, 1, 0xFA, 1);
             Quake_SetCountdown(temp, 0xA);
@@ -241,7 +241,7 @@ void BgBdanObjects_OctoPlatform_WaitForRutoToAdvanceCutscene(BgBdanObjects* this
         BgBdanObjects_SetContactRu1(this, 4);
         this->timer = 10;
         this->actionFunc = BgBdanObjects_OctoPlatform_PauseBeforeDescending;
-        func_8005B1A4(GET_ACTIVE_CAM(play));
+        Camera_SetFinishedFlag(GET_ACTIVE_CAM(play));
     }
 }
 

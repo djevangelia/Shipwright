@@ -718,7 +718,7 @@ void func_80AB6F04(EnNiw* this, PlayState* play) {
 
     this->actor.speedXZ = 2.0f;
 
-    if (this->actor.bgCheckFlags & 0x20) {
+    if (this->actor.bgCheckFlags & BGCHECKFLAG_WATER) {
         this->actor.gravity = 0.0f;
 
         if (this->actor.yDistToWater > 15.0f) {

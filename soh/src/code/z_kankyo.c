@@ -1645,7 +1645,7 @@ void Environment_DrawRain(PlayState* play, View* view, GraphicsContext* gfxCtx) 
     Vec3f windDirection = { 0.0f, 0.0f, 0.0f };
     Player* player = GET_PLAYER(play);
 
-    if (!(play->cameraPtrs[0]->unk_14C & 0x100) && (play->envCtx.unk_EE[2] == 0)) {
+    if (!(play->cameraPtrs[0]->stateFlags & 0x100) && (play->envCtx.unk_EE[2] == 0)) {
         OPEN_DISPS(gfxCtx);
 
         vec.x = view->lookAt.x - view->eye.x;
@@ -1738,7 +1738,7 @@ void Environment_DrawRain(PlayState* play, View* view, GraphicsContext* gfxCtx) 
     }
 }
 
-void func_80074CE8(PlayState* play, u32 arg1) {
+void fEnvironment_ChangeLightSetting8(PlayState* play, u32 arg1) {
     if ((play->envCtx.unk_BD != arg1) && (play->envCtx.unk_D8 >= 1.0f) && (play->envCtx.unk_BF == 0xFF)) {
         if (arg1 > 30) {
             arg1 = 0;

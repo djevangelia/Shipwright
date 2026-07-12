@@ -750,7 +750,7 @@ void EnHorse_Init(Actor* thisx, PlayState* play2) {
     EnHorse* this = (EnHorse*)thisx;
     PlayState* play = play2;
 
-    AREG(6) = 0;
+    R_EXITED_SCENE_RIDING_HORSE = 0;
     Actor_ProcessInitChain(&this->actor, sInitChain);
     EnHorse_ClearDustFlags(&this->dustFlags);
     DREG(53) = 0;
@@ -797,7 +797,7 @@ void EnHorse_Init(Actor* thisx, PlayState* play2) {
             this->stateFlags = ENHORSE_FLAG_19 | ENHORSE_CANT_JUMP | ENHORSE_UNRIDEABLE;
         } else if (this->actor.params == 6) {
             this->stateFlags = ENHORSE_FLAG_19 | ENHORSE_CANT_JUMP;
-            if (Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) || DREG(1) != 0) {
+            if (Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) || R_DEBUG_FORCE_EPONA_OBTAINED != 0) {
                 this->stateFlags &= ~ENHORSE_CANT_JUMP;
                 this->stateFlags |= ENHORSE_FLAG_26;
             } else if (gSaveContext.eventInf[0] & 0x40 && this->type == HORSE_HNI) {
@@ -811,7 +811,7 @@ void EnHorse_Init(Actor* thisx, PlayState* play2) {
     }
 
     if (play->sceneNum == SCENE_LON_LON_RANCH && (gSaveContext.eventInf[0] & 0xF) == 6 &&
-        Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) == 0 && !DREG(1)) {
+        Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) == 0 && !R_DEBUG_FORCE_EPONA_OBTAINED) {
         this->stateFlags |= ENHORSE_FLAG_25;
     }
 
@@ -845,12 +845,13 @@ void EnHorse_Init(Actor* thisx, PlayState* play2) {
                 Actor_Kill(&this->actor);
                 return;
             }
-        } else if (!Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) && !DREG(1) && !IS_DAY) {
+        } else if (!Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) && !R_DEBUG_FORCE_EPONA_OBTAINED && !IS_DAY) {
             Actor_Kill(&this->actor);
             return;
         }
     } else if (play->sceneNum == SCENE_STABLE) {
-        if (IS_DAY || Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) || DREG(1) != 0 || !LINK_IS_ADULT) {
+        if (IS_DAY || Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) || R_DEBUG_FORCE_EPONA_OBTAINED != 0 ||
+            !LINK_IS_ADULT) {
             Actor_Kill(&this->actor);
             return;
         }
@@ -885,7 +886,8 @@ void EnHorse_Init(Actor* thisx, PlayState* play2) {
     } else if (this->actor.params == 8) {
         EnHorse_InitHorsebackArchery(this);
         Interface_InitHorsebackArchery(play);
-    } else if (play->sceneNum == SCENE_LON_LON_RANCH && !Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) && !DREG(1)) {
+    } else if (play->sceneNum == SCENE_LON_LON_RANCH && !Flags_GetEventChkInf(EVENTCHKINF_EPONA_OBTAINED) &&
+               !R_DEBUG_FORCE_EPONA_OBTAINED) {
         EnHorse_InitFleePlayer(this);
     } else {
         if (play->sceneNum == SCENE_LON_LON_BUILDINGS) {

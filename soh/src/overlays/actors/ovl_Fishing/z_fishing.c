@@ -2328,7 +2328,7 @@ void Fishing_UpdateLure(Fishing* this, PlayState* play) {
                     Actor_UpdateBgCheckInfo(play, &this->actor, 15.0f, 30.0f, 30.0f, 0x43);
                     this->actor.world.pos = sp80;
 
-                    if (this->actor.bgCheckFlags & 0x10) {
+                    if (this->actor.bgCheckFlags & BGCHECKFLAG_CEILING) {
                         sLurePosDelta.y = -0.5f;
                     }
                     if (this->actor.bgCheckFlags & 8) {

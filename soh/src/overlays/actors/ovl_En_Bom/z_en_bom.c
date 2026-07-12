@@ -151,7 +151,7 @@ void EnBom_Move(EnBom* this, PlayState* play) {
         return;
     }
 
-    if ((this->actor.velocity.y > 0.0f) && (this->actor.bgCheckFlags & 0x10)) {
+    if ((this->actor.velocity.y > 0.0f) && (this->actor.bgCheckFlags & BGCHECKFLAG_CEILING)) {
         this->actor.velocity.y = -this->actor.velocity.y;
     }
 

@@ -334,7 +334,7 @@ void BgHeavyBlock_Wait(BgHeavyBlock* this, PlayState* play) {
                 break;
         }
 
-        quakeIndex = Quake_Add(GET_ACTIVE_CAM(play), 3);
+        quakeIndex = Quake_Request(GET_ACTIVE_CAM(play), 3);
         Quake_SetSpeed(quakeIndex, 25000);
         Quake_SetQuakeValues(quakeIndex, 1, 1, 5, 0);
         Quake_SetCountdown(quakeIndex, 10);
@@ -403,12 +403,12 @@ void BgHeavyBlock_Fly(BgHeavyBlock* this, PlayState* play) {
                 Flags_SetSwitch(play, (this->dyna.actor.params >> 8) & 0x3F);
                 Actor_Kill(&this->dyna.actor);
 
-                quakeIndex = Quake_Add(GET_ACTIVE_CAM(play), 3);
+                quakeIndex = Quake_Request(GET_ACTIVE_CAM(play), 3);
                 Quake_SetSpeed(quakeIndex, 28000);
                 Quake_SetQuakeValues(quakeIndex, 14, 2, 100, 0);
                 Quake_SetCountdown(quakeIndex, 30);
 
-                quakeIndex = Quake_Add(GET_ACTIVE_CAM(play), 2);
+                quakeIndex = Quake_Request(GET_ACTIVE_CAM(play), 2);
                 Quake_SetSpeed(quakeIndex, 12000);
                 Quake_SetQuakeValues(quakeIndex, 5, 0, 0, 0);
                 Quake_SetCountdown(quakeIndex, 999);
@@ -418,7 +418,7 @@ void BgHeavyBlock_Fly(BgHeavyBlock* this, PlayState* play) {
             case HEAVYBLOCK_UNBREAKABLE_OUTSIDE_CASTLE:
                 Audio_PlayActorSound2(&this->dyna.actor, NA_SE_EV_STONE_BOUND);
 
-                quakeIndex = Quake_Add(GET_ACTIVE_CAM(play), 3);
+                quakeIndex = Quake_Request(GET_ACTIVE_CAM(play), 3);
                 Quake_SetSpeed(quakeIndex, 28000);
                 Quake_SetQuakeValues(quakeIndex, 16, 2, 120, 0);
                 Quake_SetCountdown(quakeIndex, 40);
@@ -429,7 +429,7 @@ void BgHeavyBlock_Fly(BgHeavyBlock* this, PlayState* play) {
             case HEAVYBLOCK_UNBREAKABLE:
                 Audio_PlayActorSound2(&this->dyna.actor, NA_SE_EV_BUYOSTAND_STOP_U);
 
-                quakeIndex = Quake_Add(GET_ACTIVE_CAM(play), 3);
+                quakeIndex = Quake_Request(GET_ACTIVE_CAM(play), 3);
                 Quake_SetSpeed(quakeIndex, 28000);
                 Quake_SetQuakeValues(quakeIndex, 14, 2, 100, 0);
                 Quake_SetCountdown(quakeIndex, 40);
@@ -437,7 +437,7 @@ void BgHeavyBlock_Fly(BgHeavyBlock* this, PlayState* play) {
                 this->actionFunc = BgHeavyBlock_Land;
                 break;
             default:
-                quakeIndex = Quake_Add(GET_ACTIVE_CAM(play), 3);
+                quakeIndex = Quake_Request(GET_ACTIVE_CAM(play), 3);
                 Quake_SetSpeed(quakeIndex, 28000);
                 Quake_SetQuakeValues(quakeIndex, 14, 2, 100, 0);
                 Quake_SetCountdown(quakeIndex, 40);

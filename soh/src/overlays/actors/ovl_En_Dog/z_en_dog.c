@@ -384,7 +384,7 @@ void EnDog_FollowPlayer(EnDog* this, PlayState* play) {
         }
 
         // If doggo is in the water make sure it's floating
-        if (this->actor.bgCheckFlags & 0x20) {
+        if (this->actor.bgCheckFlags & BGCHECKFLAG_WATER) {
             this->actor.gravity = 0.0f;
             if (this->actor.yDistToWater > 11.0f) {
                 this->actor.world.pos.y += 2.0f;

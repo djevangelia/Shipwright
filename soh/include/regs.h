@@ -138,6 +138,8 @@
 #define R_TEXTBOX_ICON_XPOS         YREG(71)
 #define R_TEXTBOX_ICON_YPOS         YREG(72)
 #define R_TEXTBOX_ICON_SIZE         YREG(75)
+#define R_EXITED_SCENE_RIDING_HORSE AREG(6) // Used to spawn the player on top of Epona in the next scene
+#define R_DEBUG_FORCE_EPONA_OBTAINED    DREG(1) // If set, overrides EVENTCHKINF_EPONA_OBTAINED state giving Epona
 #define R_TEXTBOX_X                 VREG(0)
 #define R_TEXTBOX_Y                 VREG(1)
 #define R_TEXTBOX_END_XPOS          XREG(64)

@@ -357,7 +357,7 @@ void EnHintnuts_Run(EnHintnuts* this, PlayState* play) {
 
     Math_StepToF(&this->actor.speedXZ, 7.5f, 1.0f);
     if (Math_SmoothStepToS(&this->actor.world.rot.y, this->unk_196, 1, 0xE38, 0xB6) == 0) {
-        if (this->actor.bgCheckFlags & 0x20) {
+        if (this->actor.bgCheckFlags & BGCHECKFLAG_WATER) {
             this->unk_196 = Actor_WorldYawTowardPoint(&this->actor, &this->actor.home.pos);
         } else if (this->actor.bgCheckFlags & 8) {
             this->unk_196 = this->actor.wallYaw;
