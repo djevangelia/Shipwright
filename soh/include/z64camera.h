@@ -38,6 +38,12 @@
 #define CAM_STATE_CAM_INIT (1 << 14) // Set in Camera_Init, never used or changed
 #define CAM_STATE_PLAYER_DIVING ((s16)(1 << 15)) // Diving from the surface of the water down
 
+#define CAM_DATA_SET_0 (1 << 0)
+#define CAM_DATA_SET_1 (1 << 1)
+#define CAM_DATA_SET_2 (1 << 2)
+#define CAM_DATA_SET_3 (1 << 3)
+#define CAM_DATA_SET_4 (1 << 4)
+
 typedef enum {
     /* 0x00 */ CAM_SET_NONE,
     /* 0x01 */ CAM_SET_NORMAL0,
@@ -649,6 +655,22 @@ typedef struct {
     { atLerpStepScale, CAM_DATA_AT_LERP_STEP_SCALE }, \
     { yawUpdateRateTarget, CAM_DATA_YAW_UPDATE_RATE_TARGET }, \
     { flags, CAM_DATA_FLAGS }
+
+typedef enum CameraItemType {
+    /*  1 */ CAM_ITEM_TYPE_1 = 1,
+    /*  2 */ CAM_ITEM_TYPE_2,
+    /*  3 */ CAM_ITEM_TYPE_3,
+    /*  4 */ CAM_ITEM_TYPE_4,
+    /*  5 */ CAM_ITEM_TYPE_5,
+    /*  8 */ CAM_ITEM_TYPE_8 = 8,
+    /*  9 */ CAM_ITEM_TYPE_9,
+    /* 10 */ CAM_ITEM_TYPE_10,
+    /* 11 */ CAM_ITEM_TYPE_11,
+    /* 12 */ CAM_ITEM_TYPE_12,
+    /* 81 */ CAM_ITEM_TYPE_81 = 81,
+    /* 90 */ CAM_ITEM_TYPE_90 = 90,
+    /* 91 */ CAM_ITEM_TYPE_91
+} CameraItemType;
 
 typedef struct {
     /* 0x00 */ f32 unk_00;

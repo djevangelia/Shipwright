@@ -13,6 +13,7 @@
 #include "soh/frame_interpolation.h"
 #include "soh/OTRGlobals.h"
 #include "soh/Enhancements/game-interactor/GameInteractor_Hooks.h"
+#include "soh/Enhancements/savestate_serialize.h"
 #include <libultraship/bridge/resourcebridge.h>
 
 #include <string.h>
@@ -112,17 +113,27 @@ static ColliderCylinderInit sLightBallCylinderInit = {
 static u8 D_808E4C58[] = { 0, 12, 10, 12, 14, 16, 12, 14, 16, 12, 14, 16, 12, 14, 16, 10, 16, 14 };
 static Vec3f sZeroVec = { 0.0f, 0.0f, 0.0f };
 
-EnGanonMant* sBossGanonCape;
+static EnGanonMant* sBossGanonCape;
 
-s32 sBossGanonSeed1;
-s32 sBossGanonSeed3;
-s32 sBossGanonSeed2;
+static s32 sBossGanonSeed1;
+static s32 sBossGanonSeed3;
+static s32 sBossGanonSeed2;
 
-BossGanon* sBossGanonGanondorf;
+static BossGanon* sBossGanonGanondorf;
 
-EnZl3* sBossGanonZelda;
+static EnZl3* sBossGanonZelda;
 
-GanondorfEffect sBossGanonEffectBuf[200];
+static GanondorfEffect sBossGanonEffectBuf[200];
+
+#define BOSS_GANON_SHIP_SAVESTATE_FIELDS(F) \
+    F(sBossGanonSeed1)                      \
+    F(sBossGanonSeed2)                      \
+    F(sBossGanonSeed3)                      \
+    F(sBossGanonGanondorf)                  \
+    F(sBossGanonZelda)                      \
+    F(sBossGanonCape)                       \
+    F(sBossGanonEffectBuf)
+SHIP_SAVESTATE_DEFINE(BossGanon, BOSS_GANON_SHIP_SAVESTATE_FIELDS)
 
 static u8 sWindowShatterTex[2048] = { { 0 } };
 
@@ -797,7 +808,7 @@ void BossGanon_IntroCutscene(BossGanon* this, PlayState* play) {
 
             if (this->csTimer == 20) {
                 Player_SetCsActionWithHaltedActors(play, &this->actor, 0x17);
-                Interface_ChangeAlpha(11); // show hearts only
+                Interface_ChangeHudVisibilityMode(11); // show hearts only
             }
 
             if (this->csTimer == 25) {
@@ -805,7 +816,7 @@ void BossGanon_IntroCutscene(BossGanon* this, PlayState* play) {
             }
 
             if (this->csTimer == 100) {
-                Interface_ChangeAlpha(1);
+                Interface_ChangeHudVisibilityMode(1);
             }
 
             if (this->csTimer == 120) {
@@ -4142,7 +4153,7 @@ void BossGanon_LightBall_Update(Actor* thisx, PlayState* play2) {
             spBA = 4;
         }
 
-        if ((spBA != 0) || (this->actor.bgCheckFlags & 1)) {
+        if ((spBA != 0) || (this->actor.bgCheckFlags & BGCHECKFLAG_GROUND)) {
             f32 sp58;
             f32 sp54;
             f32 phi_f20;

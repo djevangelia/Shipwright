@@ -8,6 +8,7 @@
 #include "soh/ResourceManagerHelpers.h"
 #include "soh/Enhancements/game-interactor/GameInteractor.h"
 #include "soh/Enhancements/game-interactor/GameInteractor_Hooks.h"
+#include "soh/Enhancements/savestate_serialize.h"
 
 typedef enum {
     /* 0 */ LENS_FLARE_CIRCLE0,
@@ -58,6 +59,9 @@ u8 D_8011FB38 = 0;
 u8 gSkyboxBlendingEnabled = false;
 
 u16 gTimeIncrement = 0;
+
+#define ENVIRONMENT_SHIP_SAVESTATE_FIELDS(F) F(gTimeIncrement)
+SHIP_SAVESTATE_DEFINE(Environment, ENVIRONMENT_SHIP_SAVESTATE_FIELDS)
 
 u16 D_8011FB44 = 0xFFFC;
 
@@ -2165,7 +2169,7 @@ void Environment_FadeInGameOverLights(PlayState* play) {
         sGameOverLightsIntensity += 2;
     }
 
-    if (func_800C0CB8(play)) {
+    if (Play_CamIsNotFixed(play)) {
         for (i = 0; i < 3; i++) {
             if (play->envCtx.adjAmbientColor[i] > -255) {
                 play->envCtx.adjAmbientColor[i] -= 12;
@@ -2212,7 +2216,7 @@ void Environment_FadeOutGameOverLights(PlayState* play) {
                                   sGameOverLightsIntensity, sGameOverLightsIntensity, sGameOverLightsIntensity, 255);
     }
 
-    if (func_800C0CB8(play)) {
+    if (Play_CamIsNotFixed(play)) {
         for (i = 0; i < 3; i++) {
             Math_SmoothStepToS(&play->envCtx.adjAmbientColor[i], 0, 5, 12, 1);
             Math_SmoothStepToS(&play->envCtx.adjLight1Color[i], 0, 5, 12, 1);
@@ -2440,7 +2444,7 @@ void Environment_AdjustLights(PlayState* play, f32 arg1, f32 arg2, f32 arg3, f32
     f32 temp;
     s32 i;
 
-    if (play->roomCtx.curRoom.behaviorType1 != ROOM_BEHAVIOR_TYPE1_5 && func_800C0CB8(play)) {
+    if (play->roomCtx.curRoom.behaviorType1 != ROOM_BEHAVIOR_TYPE1_5 && Play_CamIsNotFixed(play)) {
         arg1 = CLAMP_MIN(arg1, 0.0f);
         arg1 = CLAMP_MAX(arg1, 1.0f);
 
