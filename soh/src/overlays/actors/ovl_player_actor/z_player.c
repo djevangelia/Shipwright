@@ -4727,7 +4727,7 @@ s32 func_808382DC(Player* this, PlayState* play) {
     } else {
         sp68 = ((Player_GetHeight(this) - 8.0f) < (this->unk_6C4 * this->actor.scale.y));
 
-        if (sp68 || (this->actor.bgCheckFlags & BGCHECKFLAG_CRUSHED) || (sFloorType == 9) ||
+        if (sp68 || (this->actor.bgCheckFlags & BGCHECKFLAG_CRUSHED) || (sFloorType == FLOOR_TYPE_9) ||
             (this->stateFlags2 & PLAYER_STATE2_FORCED_VOID_OUT)) {
             Player_PlayVoiceSfx(this, NA_SE_VO_LI_DAMAGE_S);
 
@@ -4939,7 +4939,7 @@ s32 Player_ActionHandler_12(Player* this, PlayState* play) {
             return 0;
         }
 
-        if ((this->actor.wallBgId != BGCHECK_SCENE) && (sTouchedWallFlags & 0x40)) {
+        if ((this->actor.wallBgId != BGCHECK_SCENE) && (sTouchedWallFlags & WALL_FLAG_6)) {
             if (this->ledgeClimbDelayTimer >= 6) {
                 this->stateFlags2 |= PLAYER_STATE2_DO_ACTION_CLIMB;
                 if (CHECK_BTN_ALL(sControlInput->press.button, BTN_A)) {
@@ -6293,7 +6293,7 @@ s32 func_8083BB20(Player* this) {
 }
 
 s32 func_8083BBA0(Player* this, PlayState* play) {
-    if (func_8083BB20(this) && (sFloorType != 7)) {
+    if (func_8083BB20(this) && (sFloorType != FLOOR_TYPE_7)) {
         func_8083BA90(play, this, PLAYER_MWA_JUMPSLASH_START, 3.0f, 4.5f);
         return 1;
     }
@@ -6310,7 +6310,7 @@ void Player_SetupRoll(Player* this, PlayState* play) {
 }
 
 s32 Player_TryRoll(Player* this, PlayState* play) {
-    if ((this->controlStickDirections[this->controlStickDataIndex] == 0) && (sFloorType != 7)) {
+    if ((this->controlStickDirections[this->controlStickDataIndex] == 0) && (sFloorType != FLOOR_TYPE_7)) {
         Player_SetupRoll(this, play);
 
         return true;
@@ -6340,7 +6340,7 @@ s32 Player_ActionHandler_10(Player* this, PlayState* play) {
     s32 controlStickDirection;
 
     if (CHECK_BTN_ALL(sControlInput->press.button, BTN_A) &&
-        (play->roomCtx.curRoom.behaviorType1 != ROOM_BEHAVIOR_TYPE1_2) && (sFloorType != 7) &&
+        (play->roomCtx.curRoom.behaviorType1 != ROOM_BEHAVIOR_TYPE1_2) && (sFloorType != FLOOR_TYPE_7) &&
         (SurfaceType_GetFloorEffect(&play->colCtx, this->actor.floorPoly, this->actor.floorBgId) != 1)) {
         controlStickDirection = this->controlStickDirections[this->controlStickDataIndex];
 
@@ -6963,7 +6963,7 @@ void func_8083D6EC(PlayState* play, Player* this) {
         temp1 = fabsf(this->linearVelocity) * 20.0f;
         temp3 = 0.0f;
 
-        if (sFloorType == 4) {
+        if (sFloorType == FLOOR_TYPE_4) {
             if (this->unk_6C4 > 1300.0f) {
                 temp2 = this->unk_6C4;
             } else {
@@ -6978,7 +6978,7 @@ void func_8083D6EC(PlayState* play, Player* this) {
             temp2 = 20000.0f;
             if (this->currentBoots != PLAYER_BOOTS_HOVER) {
                 temp1 += temp1;
-            } else if ((sFloorType == 7) || (this->currentBoots == PLAYER_BOOTS_IRON)) {
+            } else if ((sFloorType == FLOOR_TYPE_7) || (this->currentBoots == PLAYER_BOOTS_IRON)) {
                 temp1 = 0;
             }
         }
@@ -7082,7 +7082,7 @@ void func_8083DC54(Player* this, PlayState* play) {
         return;
     }
 
-    if (sFloorType == 11) {
+    if (sFloorType == FLOOR_TYPE_11) {
         Math_SmoothStepToS(&this->actor.focus.rot.x, -20000, 10, 4000, 800);
     } else {
         sp46 = 0;
@@ -9557,7 +9557,7 @@ s32 func_80843E64(PlayState* play, Player* this) {
         return 0;
     }
 
-    if ((sFloorType == 6) || (sFloorType == 9)) {
+    if ((sFloorType == FLOOR_TYPE_6) || (sFloorType == FLOOR_TYPE_9)) {
         fallDistance = 0;
     } else {
         fallDistance = this->fallDistance;
@@ -9603,7 +9603,7 @@ s32 func_80843E64(PlayState* play, Player* this) {
 
         Player_RequestRumble(this, (u8)fallDistance, (u8)(fallDistance * 0.1f), (u8)fallDistance, 0);
 
-        if (sFloorType == 6) {
+        if (sFloorType == FLOOR_TYPE_6) {
             Player_PlayVoiceSfx(this, NA_SE_VO_LI_CLIMB_END);
         }
     }
@@ -11079,7 +11079,7 @@ void Player_UpdateInterface(PlayState* play, Player* this) {
                     if ((!(this->stateFlags1 & PLAYER_STATE1_CLIMBING_LEDGE) &&
                          (controlStickDirection <= PLAYER_STICK_DIR_FORWARD) &&
                          (Player_CheckHostileLockOn(this) ||
-                          ((sFloorType != 7) && (Player_FriendlyLockOnOrParallel(this) ||
+                          ((sFloorType != FLOOR_TYPE_7) && (Player_FriendlyLockOnOrParallel(this) ||
                                                  ((play->roomCtx.curRoom.behaviorType1 != ROOM_BEHAVIOR_TYPE1_2) &&
                                                   !(this->stateFlags1 & PLAYER_STATE1_SHIELDING) &&
                                                   (controlStickDirection == PLAYER_STICK_DIR_FORWARD))))))) {
@@ -11966,7 +11966,7 @@ void Player_UpdateCommon(Player* this, PlayState* play, Input* input) {
             Player_ProcessSceneCollision(play, this);
         } else {
             if (GameInteractor_Should(VB_SET_STATIC_FLOOR_TYPE, true, this)) {
-                sFloorType = 0;
+                sFloorType = FLOOR_TYPE_0;
             }
             this->floorProperty = FLOOR_PROPERTY_0;
 
@@ -11976,7 +11976,7 @@ void Player_UpdateCommon(Player* this, PlayState* play, Input* input) {
                 s32 sp58;
                 Vec3f sp4C;
 
-                if (!(rideActor->actor.bgCheckFlags & 1)) {
+                if (!(rideActor->actor.bgCheckFlags & BGCHECKFLAG_GROUND)) {
                     func_808396F4(play, this, &D_80854814, &sp4C, &sp5C, &sp58);
                 } else {
                     sp5C = rideActor->actor.floorPoly;

@@ -586,7 +586,7 @@ s32 AudioLoad_SyncInitSeqPlayerInternal(s32 playerIdx, s32 seqId, s32 arg2) {
 
     fontId = 0xFF;
 
-    // seqId is the resolved 16-bit id from func_800F9280(). Reject ids with no loaded sequence; the
+    // seqId is the resolved 16-bit id from Audio_StartSequence(). Reject ids with no loaded sequence; the
     // map has sequenceMapSize + 0xF slots (custom ids skip the reserved 129-135 range).
     if (seqId < 0 || (size_t)seqId >= sequenceMapSize + 0xF || sequenceMap[seqId] == NULL) {
         return 0;
