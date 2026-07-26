@@ -34,6 +34,7 @@
 extern Ship::IResource* OTRPlay_LoadFile(PlayState* play, const char* fileName);
 extern "C" s32 Object_Spawn(ObjectContext* objectCtx, s16 objectId);
 extern "C" RomFile sNaviMsgFiles[];
+extern "C" u32 gTotalAlloc;
 s32 OTRScene_ExecuteCommands(PlayState* play, SOH::Scene* scene);
 
 bool Scene_CommandSpawnList(PlayState* play, SOH::ISceneCommand* cmd) {
@@ -105,6 +106,16 @@ bool Scene_CommandSpecialFiles(PlayState* play, SOH::ISceneCommand* cmd) {
         auto res =
             (Ship::Blob*)OTRPlay_LoadFile(play, sNaviMsgFiles[specialCmd->specialObjects.elfMessage - 1].fileName);
         play->cUpElfMsgs = (ElfMessage*)res->Data.data();
+
+        if (specialCmd->specialObjects.elfMessage == 1) {
+            gTotalAlloc += 0x70; // field alloc
+            LUSLOG_INFO("gTotalAlloc navi field += %x (remain: %x)", 0x70, 0x1D4790 - gTotalAlloc);
+        } else if (specialCmd->specialObjects.elfMessage == 2) {
+            gTotalAlloc += 0x10; // dungeon alloc
+            LUSLOG_INFO("gTotalAlloc navi dungeon += %x (remain: %x)", 0x10, 0x1D4790 - gTotalAlloc);
+        }
+    } else {
+        LUSLOG_INFO("no navi alloc");
     }
 
     return false;

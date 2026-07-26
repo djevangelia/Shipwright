@@ -34,6 +34,7 @@ Input* D_8012D1F8 = NULL;
 
 PlayState* gPlayState;
 s16 firstInit = 0;
+u32 gTotalAlloc;
 
 void Play_SpawnScene(PlayState* play, s32 sceneId, s32 spawn);
 
@@ -393,6 +394,8 @@ void Play_Init(GameState* thisx) {
     GameState_Realloc(&play->state, 0x1D4790 * 2);
     // Heap sim: start tracking game allocs against the original (undoubled) heap size
     HeapSim_BeginSimulation();
+    gTotalAlloc = 0; // start scene = reset zelda heap size
+    LUSLOG_INFO("reset alloc %d", gTotalAlloc);
     KaleidoManager_Init(play);
     View_Init(&play->view, gfxCtx);
     Audio_SetExtraFilter(0);
@@ -1316,6 +1319,58 @@ skip:
                        play->state.gfxCtx);
 }
 
+void Display_DrawScreenText(Gfx** gfxP, PlayState* play);
+
+void Display_SetupDrawScreenText(PlayState* play) {
+    Gfx* gfx;
+    Gfx* gfxRef;
+
+    OPEN_DISPS(play->state.gfxCtx);
+    Gfx_SetupDL_39Opa(play->state.gfxCtx);
+
+    gDPSetRenderMode(POLY_OPA_DISP++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+    gDPSetCombineMode(POLY_OPA_DISP++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+    gDPSetCombineLERP(POLY_OPA_DISP++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0,
+                      PRIMITIVE, 0);
+
+    gfxRef = POLY_OPA_DISP;
+    gfx = Graph_GfxPlusOne(gfxRef);
+    gSPDisplayList(OVERLAY_DISP++, gfx);
+
+    Display_DrawScreenText(&gfx, play);
+
+    gSPEndDisplayList(gfx++);
+    Graph_BranchDlist(gfxRef, gfx);
+    POLY_OPA_DISP = gfx;
+
+    gDPPipeSync(POLY_OPA_DISP++);
+    gDPSetRenderMode(POLY_OPA_DISP++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+    gDPSetCombineMode(POLY_OPA_DISP++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 200, 120);
+    gDPFillRectangle(POLY_OPA_DISP++, 10, 20, 10, 20);
+
+    CLOSE_DISPS(play->state.gfxCtx);
+}
+
+void Display_DrawScreenText(Gfx** gfxP, PlayState* play) {
+    GfxPrint printer;
+    Player* player = GET_PLAYER(play);
+    GfxPrint_Init(&printer);
+    GfxPrint_Open(&printer, *gfxP);
+
+    ActorDBEntry* dbEntry = ActorDB_Retrieve(ACTOR_EN_RR);
+    GfxPrint_SetColor(&printer, 255, 140, 200, 128);
+    GfxPrint_SetPos(&printer, 3, 16);
+    GfxPrint_Printf(&printer, "EnRr: %d", dbEntry->numLoaded);
+    GfxPrint_SetPos(&printer, 3, 17);
+    GfxPrint_Printf(&printer, "scene: %x", play->sceneNum);
+    GfxPrint_SetPos(&printer, 3, 28);
+    GfxPrint_Printf(&printer, "super alloc = %x", 0x1D4790 - gTotalAlloc);
+
+    *gfxP = GfxPrint_Close(&printer);
+    GfxPrint_Destroy(&printer);
+}
+
 void Play_DrawOverlayElements(PlayState* play) {
     if ((play->pauseCtx.state != 0) || (play->pauseCtx.debugState != 0)) {
         KaleidoScopeCall_Draw(play);
@@ -1330,6 +1385,8 @@ void Play_DrawOverlayElements(PlayState* play) {
     if (play->gameOverCtx.state != GAMEOVER_INACTIVE) {
         GameOver_FadeInLights(play);
     }
+
+    Display_SetupDrawScreenText(play);
 }
 
 void Play_Draw(PlayState* play) {

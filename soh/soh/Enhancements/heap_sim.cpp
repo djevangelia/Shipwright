@@ -516,6 +516,117 @@ static const std::unordered_map<s16, size_t> skyboxAllocSizes = {
     { SKYBOX_HOUSE_ALLEY, 0x30600 },
 };
 
+
+typedef struct sceneFileSize {
+    s32 sceneId;
+    u32 size;
+} sceneFileSize;
+
+// sizes from matching ntsc 1.0 map file
+static const sceneFileSize sSceneFileSizes[] = {
+    { SCENE_DEKU_TREE, 0xda10 },
+    { SCENE_DODONGOS_CAVERN, 0x15140 },
+    { SCENE_JABU_JABU, 0x157c0 },
+    { SCENE_FOREST_TEMPLE, 0x15f90 },
+    { SCENE_FIRE_TEMPLE, 0x1a970 },
+    { SCENE_WATER_TEMPLE, 0x15cf0 },
+    { SCENE_SPIRIT_TEMPLE, 0x19b40 },
+    { SCENE_SHADOW_TEMPLE, 0x183c0 },
+    { SCENE_BOTTOM_OF_THE_WELL, 0xc560 },
+    { SCENE_ICE_CAVERN, 0x11610 },
+    { SCENE_GANONS_TOWER, 0x107b0 },
+    { SCENE_GERUDO_TRAINING_GROUND, 0x11530 },
+    { SCENE_THIEVES_HIDEOUT, 0xd920 },
+    { SCENE_INSIDE_GANONS_CASTLE, 0x217c0 },
+    { SCENE_GANONS_TOWER_COLLAPSE_INTERIOR, 0x7f10 },
+    { SCENE_INSIDE_GANONS_CASTLE_COLLAPSE, 0x4b00 },
+    { SCENE_TREASURE_BOX_SHOP, 0x71b0 },
+    { SCENE_DEKU_TREE_BOSS, 0x1740 },
+    { SCENE_DODONGOS_CAVERN_BOSS, 0x2860 },
+    { SCENE_JABU_JABU_BOSS, 0xe40 },
+    { SCENE_FOREST_TEMPLE_BOSS, 0x1900 },
+    { SCENE_FIRE_TEMPLE_BOSS, 0x4c00 },
+    { SCENE_WATER_TEMPLE_BOSS, 0x1a60 },
+    { SCENE_SPIRIT_TEMPLE_BOSS, 0x8cf0 },
+    { SCENE_SHADOW_TEMPLE_BOSS, 0x2780 },
+    { SCENE_GANONDORF_BOSS, 0x7c20 },
+    { SCENE_GANONS_TOWER_COLLAPSE_EXTERIOR, 0x12180 },
+    { SCENE_MARKET_ENTRANCE_DAY, 0x3e0 },
+    { SCENE_MARKET_ENTRANCE_NIGHT, 0x430 },
+    { SCENE_MARKET_ENTRANCE_RUINS, 0x3e0 },
+    { SCENE_BACK_ALLEY_DAY, 0x1250 },
+    { SCENE_BACK_ALLEY_NIGHT, 0x12f0 },
+    { SCENE_MARKET_DAY, 0x2670 },
+    { SCENE_MARKET_NIGHT, 0x2630 },
+    { SCENE_MARKET_RUINS, 0x1630 },
+    { SCENE_TEMPLE_OF_TIME_EXTERIOR_DAY, 0x14e0 },
+    { SCENE_TEMPLE_OF_TIME_EXTERIOR_NIGHT, 0x1500 },
+    { SCENE_TEMPLE_OF_TIME_EXTERIOR_RUINS, 0x1490 },
+    { SCENE_KNOW_IT_ALL_BROS_HOUSE, 0xcc0 },
+    { SCENE_TWINS_HOUSE, 0x17a0 },
+    { SCENE_MIDOS_HOUSE, 0x1ab0 },
+    { SCENE_SARIAS_HOUSE, 0x1410 },
+    { SCENE_KAKARIKO_CENTER_GUEST_HOUSE, 0xea0 },
+    { SCENE_BACK_ALLEY_HOUSE, 0x840 },
+    { SCENE_BAZAAR, 0x2f0 },
+    { SCENE_KOKIRI_SHOP, 0x980 },
+    { SCENE_GORON_SHOP, 0x3a0 },
+    { SCENE_ZORA_SHOP, 0x390 },
+    { SCENE_POTION_SHOP_KAKARIKO, 0x3f0 },
+    { SCENE_POTION_SHOP_MARKET, 0x5b0 },
+    { SCENE_BOMBCHU_SHOP, 0x670 },
+    { SCENE_HAPPY_MASK_SHOP, 0x370 },
+    { SCENE_LINKS_HOUSE, 0x1b60 },
+    { SCENE_DOG_LADY_HOUSE, 0xd10 },
+    { SCENE_STABLE, 0x670 },
+    { SCENE_IMPAS_HOUSE, 0xef0 },
+    { SCENE_LAKESIDE_LABORATORY, 0x11090 },
+    { SCENE_CARPENTERS_TENT, 0x680 },
+    { SCENE_GRAVEKEEPERS_HUT, 0x510 },
+    { SCENE_GREAT_FAIRYS_FOUNTAIN_MAGIC, 0xe000 },
+    { SCENE_FAIRYS_FOUNTAIN, 0x8810 },
+    { SCENE_GREAT_FAIRYS_FOUNTAIN_SPELLS, 0xcda0 },
+    { SCENE_GROTTOS, 0xd820 },
+    { SCENE_REDEAD_GRAVE, 0xa90 },
+    { SCENE_GRAVE_WITH_FAIRYS_FOUNTAIN, 0xd090 },
+    { SCENE_ROYAL_FAMILYS_TOMB, 0x4ae0 },
+    { SCENE_SHOOTING_GALLERY, 0xc2c0 },
+    { SCENE_TEMPLE_OF_TIME, 0x127a0 },
+    { SCENE_CHAMBER_OF_THE_SAGES, 0x38f0 },
+    { SCENE_CASTLE_COURTYARD_GUARDS_DAY, 0x11390 },
+    { SCENE_CASTLE_COURTYARD_GUARDS_NIGHT, 0x90f0 },
+    { SCENE_CUTSCENE_MAP, 0x3d50 },
+    { SCENE_WINDMILL_AND_DAMPES_GRAVE, 0xe270 },
+    { SCENE_FISHING_POND, 0x126e0 },
+    { SCENE_CASTLE_COURTYARD_ZELDA, 0x3a20 },
+    { SCENE_BOMBCHU_BOWLING_ALLEY, 0xeb20 },
+    { SCENE_LON_LON_BUILDINGS, 0x6c10 },
+    { SCENE_MARKET_GUARD_HOUSE, 0xc550 },
+    { SCENE_POTION_SHOP_GRANNY, 0xaa20 },
+    { SCENE_GANON_BOSS, 0x9070 },
+    { SCENE_HOUSE_OF_SKULLTULA, 0x1610 },
+    { SCENE_HYRULE_FIELD, 0x2a220 },
+    { SCENE_KAKARIKO_VILLAGE, 0x1c150 },
+    { SCENE_GRAVEYARD, 0xbc80 },
+    { SCENE_ZORAS_RIVER, 0xb560 },
+    { SCENE_KOKIRI_FOREST, 0x11240 },
+    { SCENE_SACRED_FOREST_MEADOW, 0x14d60 },
+    { SCENE_LAKE_HYLIA, 0x1b430 },
+    { SCENE_ZORAS_DOMAIN, 0x9820 },
+    { SCENE_ZORAS_FOUNTAIN, 0x116a0 },
+    { SCENE_GERUDO_VALLEY, 0x11160 },
+    { SCENE_LOST_WOODS, 0x10430 },
+    { SCENE_DESERT_COLOSSUS, 0x194e0 },
+    { SCENE_GERUDOS_FORTRESS, 0xfe80 },
+    { SCENE_HAUNTED_WASTELAND, 0x5e30 },
+    { SCENE_HYRULE_CASTLE, 0x18500 },
+    { SCENE_DEATH_MOUNTAIN_TRAIL, 0x1ea90 },
+    { SCENE_DEATH_MOUNTAIN_CRATER, 0xfee0 },
+    { SCENE_GORON_CITY, 0xa450 },
+    { SCENE_LON_LON_RANCH, 0x11dc0 },
+    { SCENE_OUTSIDE_GANONS_CASTLE, 0x4b70 },
+};
+
 static bool HeapSim_IsInitialized() {
     return __osMallocIsInitialized(&sHeapSimArena);
 }
@@ -555,16 +666,203 @@ extern "C" void HeapSim_MirrorMapMarkLoad(void) {
     HeapSim_DeductGameAlloc(kMapMarkOvlSize);
 }
 
+extern "C" u32 gTotalAlloc;
+
+#define SUPER_ALLOC_LOG LUSLOG_INFO
+//#define SUPER_ALLOC_LOG(format, ...) (void)0
+#define SUPER_REMAIN_SIZE 0x1D4790 - (gTotalAlloc)
+#define SUPER_ALIGN_ADD_16(x) ((((gTotalAlloc + 0xF) & ~0xF) + x + 0xF) & ~0xF)
+#define SUPER_ALIGN_ADD_2(x) ((((gTotalAlloc + 0x1) & ~0x1) + x + 0x1) & ~0x1)
+
+extern "C" u32 HeapSim_SuperAlloc(PlayState* play) {
+    // individual adds for statics for logging
+    // const below doesn't contain navi or dungeon markers
+    // const u32 arenaStaticSize = 0x26560+0x2200+0x1fe0+0x3b00+0x480+0x4000+0x1000+0x500;
+    // player, parameter, effectSs, parameter, parameter, parameter, map_exp, matrix stack
+
+    // 0x26560 is player in matching ntsc 1.0
+    // 0x354a0 in ntsc 1.0 test build
+    u32 nextStatic = 0x26560; // kaleido/player
+    gTotalAlloc += nextStatic;
+    SUPER_ALLOC_LOG("gTotalAlloc kaleido = %x (remain: %x)", nextStatic, SUPER_REMAIN_SIZE);
+    nextStatic = 0x2200; // parameter
+    gTotalAlloc += nextStatic;
+    SUPER_ALLOC_LOG("gTotalAlloc param = %x (remain: %x)", nextStatic, SUPER_REMAIN_SIZE);
+    nextStatic = 0x1fe0; // effectSs
+    gTotalAlloc += nextStatic;
+    SUPER_ALLOC_LOG("gTotalAlloc effect = %x (remain: %x)", nextStatic, SUPER_REMAIN_SIZE);
+
+    // Play_SpawnScene (scene file size)
+    gTotalAlloc = SUPER_ALIGN_ADD_16(sSceneFileSizes[play->sceneNum].size);
+    SUPER_ALLOC_LOG("gTotalAlloc scenesize = %x (remain: %x)", sSceneFileSizes[play->sceneNum].size, SUPER_REMAIN_SIZE);
+
+    // Object_InitContext (object space size)
+    gTotalAlloc =
+        SUPER_ALIGN_ADD_16((u32)((uintptr_t)play->objectCtx.spaceEnd - (uintptr_t)play->objectCtx.spaceStart));
+    SUPER_ALLOC_LOG("gTotalAlloc object space += %x (remain: %x)",
+                    (u32)((uintptr_t)play->objectCtx.spaceEnd - (uintptr_t)play->objectCtx.spaceStart),
+                    SUPER_REMAIN_SIZE);
+
+    // BgCheck_Allocate = align 2
+    gTotalAlloc = SUPER_ALIGN_ADD_2(play->colCtx.subdivAmount.x * sizeof(StaticLookup) * play->colCtx.subdivAmount.y *
+                                    play->colCtx.subdivAmount.z);
+    SUPER_ALLOC_LOG("gTotalAlloc colctx += %x = %x (remain: %x)",
+                    (play->colCtx.subdivAmount.x * sizeof(StaticLookup) * play->colCtx.subdivAmount.y *
+                     play->colCtx.subdivAmount.z),
+                    ((play->colCtx.subdivAmount.x * sizeof(StaticLookup) * play->colCtx.subdivAmount.y *
+                      play->colCtx.subdivAmount.z)) &
+                        ~0x1,
+                    SUPER_REMAIN_SIZE);
+
+    // SSNodeList_Alloc 1 = align 2
+    const u32 origColCtxSize = 0x1464;
+    u32 memSizeOrig =
+        play->colCtx.subdivAmount.x * sizeof(StaticLookup) * play->colCtx.subdivAmount.y * play->colCtx.subdivAmount.z +
+        (play->colCtx.colHeader->numPolygons) * sizeof(u8) + play->colCtx.dyna.polyNodesMax * sizeof(SSNode) +
+        play->colCtx.dyna.polyListMax / 2 * sizeof(CollisionPoly) + play->colCtx.dyna.vtxListMax / 2 * sizeof(Vec3s) +
+        origColCtxSize;
+    u32 tblMax = (play->colCtx.memSize / 2 - memSizeOrig) / sizeof(SSNode);
+
+    gTotalAlloc = SUPER_ALIGN_ADD_2(tblMax * sizeof(SSNode));
+    SUPER_ALLOC_LOG("gTotalAlloc ssnode list tblmax += %x = %x (remain: %x)", tblMax * sizeof(SSNode),
+                    ((tblMax * sizeof(SSNode))) & ~0x1, SUPER_REMAIN_SIZE);
+
+    // SSNodeList_Alloc 2 = align 16
+    gTotalAlloc = SUPER_ALIGN_ADD_16(play->colCtx.colHeader->numPolygons);
+    SUPER_ALLOC_LOG("gTotalAlloc * ssnode list numpolys += %x = %x = (num %d) (remain: %x)",
+                    play->colCtx.colHeader->numPolygons, (play->colCtx.colHeader->numPolygons + 0xF) & ~0xF,
+                    play->colCtx.colHeader->numPolygons, SUPER_REMAIN_SIZE);
+
+    // DynaPoly_AllocPolyList = align 2
+    gTotalAlloc = SUPER_ALIGN_ADD_2(play->colCtx.dyna.polyListMax * sizeof(CollisionPoly) / 2);
+    SUPER_ALLOC_LOG("gTotalAlloc dyna poly list += %x (remain: %x)",
+                    (play->colCtx.dyna.polyListMax * sizeof(CollisionPoly) / 2), SUPER_REMAIN_SIZE);
+
+    // DynaPoly_AllocVtxList = align 2
+    gTotalAlloc = SUPER_ALIGN_ADD_2(play->colCtx.dyna.vtxListMax * sizeof(Vec3s) / 2);
+    SUPER_ALLOC_LOG("gTotalAlloc dyna vtx list += %x (remain: %x)", (play->colCtx.dyna.vtxListMax * sizeof(Vec3s) / 2),
+                    SUPER_REMAIN_SIZE);
+
+    // DynaSSNodeList_Alloc = align 2
+    gTotalAlloc = SUPER_ALIGN_ADD_2(play->colCtx.dyna.polyNodesMax * sizeof(SSNode));
+    SUPER_ALLOC_LOG("gTotalAlloc dyna ss node += %x (remain: %x)", play->colCtx.dyna.polyNodesMax * sizeof(SSNode),
+                    SUPER_REMAIN_SIZE);
+
+    // Navi alloc occurs here
+
+    // Skybox_Init
+    if (play->skyboxCtx.skyboxId != SKYBOX_NONE) {
+        if (play->skyboxCtx.unk_140 != 0) {
+            gTotalAlloc = SUPER_ALIGN_ADD_16((8 * 150 * sizeof(Gfx) / 2));
+            SUPER_ALLOC_LOG("gTotalAlloc vrbox 1 += %x (remain: %x)", (8 * 150 * sizeof(Gfx) / 2), SUPER_REMAIN_SIZE);
+            gTotalAlloc = SUPER_ALIGN_ADD_16((256 * sizeof(Vtx)));
+            SUPER_ALLOC_LOG("gTotalAlloc vrbox 2 += %x (remain: %x)", 256 * sizeof(Vtx), SUPER_REMAIN_SIZE);
+
+        } else {
+            gTotalAlloc = SUPER_ALIGN_ADD_16((12 * 150 * sizeof(Gfx) / 2));
+            SUPER_ALLOC_LOG("gTotalAlloc vrbox 3 += %x (remain: %x)", (12 * 150 * sizeof(Gfx) / 2), SUPER_REMAIN_SIZE);
+            if (play->skyboxCtx.skyboxId == SKYBOX_CUTSCENE_MAP) {
+                gTotalAlloc = SUPER_ALIGN_ADD_16((192 * sizeof(Vtx)));
+                SUPER_ALLOC_LOG("gTotalAlloc vrbox 4 += %x (remain: %x)", 192 * sizeof(Vtx), SUPER_REMAIN_SIZE);
+            } else {
+                gTotalAlloc = SUPER_ALIGN_ADD_16((160 * sizeof(Vtx)));
+                SUPER_ALLOC_LOG("gTotalAlloc vrbox 5 += %x (remain: %x)", 160 * sizeof(Vtx), SUPER_REMAIN_SIZE);
+            }
+        }
+    }
+
+    // Skybox_Setup skybox texture buffers N64 would have game-alloc'd during Play_Init
+    auto sky = skyboxAllocSizes.find(play->skyboxId);
+    if (sky != skyboxAllocSizes.end()) {
+        gTotalAlloc = SUPER_ALIGN_ADD_16((u32)sky->second);
+        SUPER_ALLOC_LOG("gTotalAlloc extra sky alloc %x", (u32)sky->second, SUPER_REMAIN_SIZE);
+    }
+
+    // func_80096FE8 (z_room); get max room size, then increase max room sizes if doors between
+    RomFile* roomList = play->roomList;
+    u32 roomSize;
+    u32 maxRoomSize = 0;
+    u32 i;
+    for (i = 0; i < play->numRooms; i++) {
+        roomSize = (u32)((uintptr_t)roomList[i].vromEnd - (uintptr_t)roomList[i].vromStart);
+        if (maxRoomSize < roomSize) {
+            maxRoomSize = roomSize;
+        }
+    }
+
+    if (play->transiActorCtx.numActors != 0) {
+        TransitionActorEntry* transitionActor = &play->transiActorCtx.list[0];
+        s32 frontRoom;
+        s32 backRoom;
+        u32 frontRoomSize;
+        u32 backRoomSize;
+        u32 cumulRoomSize;
+        roomList = play->roomList;
+
+        for (i = 0; i < play->transiActorCtx.numActors; i++) {
+            frontRoom = transitionActor->sides[0].room;
+            backRoom = transitionActor->sides[1].room;
+            frontRoomSize =
+                (frontRoom < 0)
+                    ? 0
+                    : (u32)((uintptr_t)roomList[frontRoom].vromEnd - (uintptr_t)roomList[frontRoom].vromStart);
+            backRoomSize = (backRoom < 0)
+                               ? 0
+                               : (u32)((uintptr_t)roomList[backRoom].vromEnd - (uintptr_t)roomList[backRoom].vromStart);
+            cumulRoomSize = (frontRoom != backRoom) ? frontRoomSize + backRoomSize : frontRoomSize;
+
+            if (maxRoomSize < cumulRoomSize) {
+                maxRoomSize = cumulRoomSize;
+            }
+            transitionActor++;
+        }
+    }
+
+    gTotalAlloc = SUPER_ALIGN_ADD_16(maxRoomSize);
+    SUPER_ALLOC_LOG("gTotalAlloc max room += %x (remain: %x)", maxRoomSize, SUPER_REMAIN_SIZE);
+
+    nextStatic = 0x3b00; // parameter/interface
+    gTotalAlloc += nextStatic;
+    SUPER_ALLOC_LOG("gTotalAlloc const 1 = %x (remain: %x)", nextStatic, SUPER_REMAIN_SIZE);
+    nextStatic = 0x480; // parameter/interface
+    gTotalAlloc += nextStatic;
+    SUPER_ALLOC_LOG("gTotalAlloc const 2 = %x (remain: %x)", nextStatic, SUPER_REMAIN_SIZE);
+    nextStatic = 0x4000; // parameter/interface
+    gTotalAlloc += nextStatic;
+    SUPER_ALLOC_LOG("gTotalAlloc const 3 = %x (remain: %x)", nextStatic, SUPER_REMAIN_SIZE);
+    nextStatic = 0x1000; // z_map_exp
+    gTotalAlloc += nextStatic;
+    SUPER_ALLOC_LOG("gTotalAlloc map = %x (remain: %x)", nextStatic, SUPER_REMAIN_SIZE);
+
+    // MapMark_Init dungeon map markers
+    if ((play->sceneNum <= SCENE_ICE_CAVERN) ||
+        ((play->sceneNum >= SCENE_DEKU_TREE_BOSS) && play->sceneNum <= SCENE_SHADOW_TEMPLE_BOSS)) {
+        nextStatic = 0x6b60;
+        gTotalAlloc += nextStatic;
+        SUPER_ALLOC_LOG("gTotalAlloc map mark = %x (remain: %x)", nextStatic, SUPER_REMAIN_SIZE);
+    }
+
+    // sys_matrix stack
+    nextStatic = 0x500;
+    gTotalAlloc += nextStatic;
+    SUPER_ALLOC_LOG("gTotalAlloc matrix = %x (remain: %x)", nextStatic, SUPER_REMAIN_SIZE);
+
+    // final arithmetics
+    SUPER_ALLOC_LOG("gTotalAlloc final size = %x", gTotalAlloc);
+    u32 arenaAlloc = 0x1D4790 - gTotalAlloc;
+    SUPER_ALLOC_LOG("** arena alloc = %x", arenaAlloc);
+
+    return arenaAlloc;
+}
+
 extern "C" void HeapSim_InitArena(GameState* gameState) {
     if (!trackingGameAllocs) {
         return;
     }
     trackingGameAllocs = false;
-    // skybox texture buffers N64 would have game-alloc'd during Play_Init
-    auto sky = skyboxAllocSizes.find(((PlayState*)gameState)->skyboxId);
-    if (sky != skyboxAllocSizes.end()) {
-        HeapSim_DeductGameAlloc(sky->second);
-    }
+
+    u32 arenaAlloc = HeapSim_SuperAlloc((PlayState*)gameState);
+
     uintptr_t alloc = (uintptr_t)GameState_Alloc(gameState, heapSimAllocSize, (char*)__FILE__, __LINE__);
     if (alloc == 0) {
         SPDLOG_WARN("heap sim: failed to reserve {:x} bytes for shadow heap", (u32)heapSimAllocSize);

@@ -11783,6 +11783,11 @@ void Player_UpdateCommon(Player* this, PlayState* play, Input* input) {
         }
     }
 
+    if (CHECK_BTN_ALL(sControlInput->press.button, BTN_DUP)) {
+        Actor_Spawn(&play->actorCtx, play, ACTOR_EN_RR, this->actor.world.pos.x + 50.0f, this->actor.world.pos.y,
+                    this->actor.world.pos.z + 50.0f, 0, 0, 0, 0);
+    }
+
     Math_Vec3f_Copy(&this->actor.prevPos, &this->actor.home.pos);
 
     if (this->unk_A73 != 0) {
